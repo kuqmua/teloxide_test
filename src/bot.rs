@@ -1,6 +1,6 @@
+use crate::helpers::git_info::GIT_INFO;
 use std::error::Error;
 use teloxide::{prelude::*, utils::command::BotCommands};
-use crate::helpers::git_info::GIT_INFO;
 
 #[tokio::main]
 pub async fn start_bot() {
