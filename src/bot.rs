@@ -1,4 +1,4 @@
-use crate::helpers::git_info::GIT_INFO;
+use crate::lazy_static::git_info::GIT_INFO;
 use std::error::Error;
 use teloxide::{prelude::*, utils::command::BotCommands};
 
