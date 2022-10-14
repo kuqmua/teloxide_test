@@ -4,5 +4,5 @@ use tufa_common::helpers::git::git_info::GitInformation;
 
 lazy_static! {
     pub static ref GIT_INFO: GitInformation =
-        GitInformation::get_git_commit_info("./", PROJECT_NAME);
+        GitInformation::get_git_commit_info("../", PROJECT_NAME);
 }
