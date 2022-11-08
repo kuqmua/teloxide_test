@@ -44,7 +44,7 @@ async fn answer(bot: Bot, msg: Message, cmd: Command) -> ResponseResult<()> {
             .await?
         }
         Command::GitInfo => {
-            bot.send_message(msg.chat.id, GIT_INFO.get_commit_link())
+            bot.send_message(msg.chat.id, GIT_INFO.data.get_commit_link())
                 .await?
         }
     };
