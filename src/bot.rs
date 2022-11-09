@@ -1,8 +1,11 @@
+use crate::once_cell_globals::git_info::Kekw;
 use crate::once_cell_globals::git_info::GIT_INFO;
 use teloxide::{prelude::*, utils::command::BotCommands};
 
 #[tokio::main]
 pub async fn start_bot() {
+    let f = Kekw::get_git_commit_info("", "");
+    println!("@@@{}@@@", f.commit_id);
     pretty_env_logger::init();
     log::info!("Starting command bot...");
     let bot = Bot::from_env();

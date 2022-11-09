@@ -1,4 +1,5 @@
 use crate::constants::PROJECT_NAME;
+use compile_time_git_info::CompileTimeGitInfo;
 use once_cell::sync::Lazy;
 use tufa_common::common::git::git_info::GitInformation;
 
@@ -18,9 +19,10 @@ pub static GIT_INFO: Lazy<GitInformation> =
 //     };
 // }
 
-// pub struct Kekw<'a> {
-//     pub commit_id: &'a str,
-// }
+#[derive(Debug, CompileTimeGitInfo)]
+pub struct Kekw<'a> {
+    pub commit_id: &'a str,
+}
 
 // impl Kekw<'_> {
 //     pub const fn get_git_commit_info<'a>(repo_git_path: &'a str, repo_name: &'a str) -> Kekw<'a> {
