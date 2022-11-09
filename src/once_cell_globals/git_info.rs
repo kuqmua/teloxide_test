@@ -17,5 +17,3 @@ pub static GIT_INFO: Lazy<GitInformation> =
 //         }
 //     };
 // }
-
-// pub const GIT_INFO: GitInformationWrapper = GitInformationWrapper::init("../", PROJECT_NAME);
