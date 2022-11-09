@@ -12,4 +12,5 @@ pretty_env_logger = "0.4"
 teloxide = {version = "0.11", features = ["macros", "auto-send"]}
 tokio = {version = "1.8", features = ["rt-multi-thread", "macros"]}
 # tufa_common = {git = "https://github.com/kuqmua/tufa_common"}# git version
+compile_time_git_info = {path = "../proc_macros/compile_time_git_info"}
 tufa_common = {path = "../tufa_common"}# local dev test without commits version
