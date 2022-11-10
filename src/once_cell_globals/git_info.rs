@@ -1,5 +1,5 @@
 use crate::constants::PROJECT_NAME;
-use compile_time_git_info::CompileTimeGitInfo;
+use compile_time_git_info::CompileTimeGitInfoTufaTelegramBot;
 use once_cell::sync::Lazy;
 use tufa_common::common::git::git_info::GitInformation;
 
@@ -19,9 +19,15 @@ pub static GIT_INFO: Lazy<GitInformation> =
 //     };
 // }
 
-#[derive(Debug, CompileTimeGitInfo)]
+#[derive(Debug, CompileTimeGitInfoTufaTelegramBot)]
 pub struct Kekw<'a> {
     pub commit_id: &'a str,
+    pub repo_link: &'a str,
+    pub author: &'a str,
+    pub author_email: &'a str,
+    pub commit_unix_time: &'a str,
+    pub timezone: &'a str,
+    pub message: &'a str,
 }
 
 // impl Kekw<'_> {

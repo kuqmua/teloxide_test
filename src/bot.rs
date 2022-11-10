@@ -4,7 +4,7 @@ use teloxide::{prelude::*, utils::command::BotCommands};
 
 #[tokio::main]
 pub async fn start_bot() {
-    let f = Kekw::get_git_commit_info("", "");
+    let f = Kekw::get_git_commit_info();
     println!("@@@{}@@@", f.commit_id);
     pretty_env_logger::init();
     log::info!("Starting command bot...");
