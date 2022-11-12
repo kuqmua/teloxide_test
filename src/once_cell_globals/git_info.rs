@@ -1,5 +1,2 @@
-use compile_time_git_info::CompileTimeGitInfoTufaTelegramBot;
-use tufa_common::common::git::git_info::GitInformation;
-
-#[derive(Debug, CompileTimeGitInfoTufaTelegramBot)]
-pub struct GitInfoGlobalStaticConst {}
+#[compile_time_git_info::generate_const_git_information(tufa_telegram_bot, tufa_common)]
+fn this_function_will_be_removed_and_instead_pub_const_git_info_will_be_generated_on_compile_time();
