@@ -1,5 +1,6 @@
 use crate::global_variables::compile_time::git_info::GIT_INFO;
 use teloxide::{prelude::*, utils::command::BotCommands};
+use tufa_common::traits::get_git_commit_link::GetGitCommitLink;
 
 #[tokio::main]
 pub async fn start_bot() {
@@ -44,7 +45,7 @@ async fn answer(bot: Bot, msg: Message, cmd: Command) -> ResponseResult<()> {
             .await?
         }
         Command::GitInfo => {
-            bot.send_message(msg.chat.id, GIT_INFO.get_commit_link())
+            bot.send_message(msg.chat.id, GIT_INFO.get_git_commit_link())
                 .await?
         }
     };
