@@ -1,4 +1,4 @@
-use crate::global_variables::compile_time::git_info::GIT_INFO;
+use crate::global_variables::runtime::git_info_without_lifetimes::GIT_INFO_WITHOUT_LIFETIMES;
 use teloxide::{prelude::*, utils::command::BotCommands};
 use tufa_common::traits::get_git_commit_link::GetGitCommitLink;
 
