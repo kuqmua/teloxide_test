@@ -4,4 +4,4 @@ If you clone this repo without tufa_project </br>
 repo may not work as expected </br>
 (coz some deps from tufa_project)
 
-### [setup](https://github.com/kuqmua/tufa_project/blob/main/setup.md#L55)
+### [setup](https://github.com/kuqmua/tufa_project/blob/main/setup.md)
