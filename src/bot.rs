@@ -1,16 +1,30 @@
-use crate::global_variables::runtime::git_info_without_lifetimes::GIT_INFO_WITHOUT_LIFETIMES;
-use teloxide::{prelude::*, utils::command::BotCommands};
-use tufa_common::traits::get_git_commit_link::GetGitCommitLink;
-
 #[tokio::main]
 pub async fn start_bot() {
     pretty_env_logger::init();
     log::info!("Starting command bot...");
-    let bot = Bot::from_env();
-    teloxide::commands_repl(bot, answer, Command::ty()).await;
+    match reqwest::get("http://127.0.0.1:8080/api/cats/").await {
+        Ok(r) => {
+            println!("{r:#?}");
+            match r
+                .json::<Vec<tufa_common::repositories_types::tufa_server::routes::cats::Cat>>()
+                .await
+            {
+                Ok(vec_cats) => println!("ok2 {vec_cats:#?}"),
+                Err(ee) => println!("err2{ee:#?}"),
+            }
+            println!("ok");
+        }
+        Err(e) => println!("err{e:#?}"),
+    }
+    let bot = teloxide::Bot::from_env();
+    teloxide::commands_repl(bot, answer, {
+        use teloxide::utils::command::BotCommands;
+        Command::ty()
+    })
+    .await;
 }
 
-#[derive(BotCommands, Clone)]
+#[derive(teloxide::utils::command::BotCommands, Clone)]
 #[command(
     rename_rule = "lowercase",
     description = "These commands are supported:"
@@ -26,18 +40,32 @@ enum Command {
     GitInfo,
 }
 
-async fn answer(bot: Bot, msg: Message, cmd: Command) -> ResponseResult<()> {
+async fn answer(
+    bot: teloxide::Bot,
+    msg: teloxide::types::Message,
+    cmd: Command,
+) -> teloxide::requests::ResponseResult<()> {
     log::info!("answer");
     match cmd {
         Command::Help => {
-            bot.send_message(msg.chat.id, Command::descriptions().to_string())
-                .await?
+            use teloxide::prelude::Requester;
+            bot.send_message(
+                msg.chat.id,
+                {
+                    use teloxide::utils::command::BotCommands;
+                    Command::descriptions()
+                }
+                .to_string(),
+            )
+            .await?
         }
         Command::Username(username) => {
+            use teloxide::prelude::Requester;
             bot.send_message(msg.chat.id, format!("Your username is @{username}."))
                 .await?
         }
         Command::UsernameAndAge { username, age } => {
+            use teloxide::prelude::Requester;
             bot.send_message(
                 msg.chat.id,
                 format!("Your username is @{username} and age is {age}."),
@@ -45,8 +73,12 @@ async fn answer(bot: Bot, msg: Message, cmd: Command) -> ResponseResult<()> {
             .await?
         }
         Command::GitInfo => {
-            bot.send_message(msg.chat.id, GIT_INFO.get_git_commit_link())
-                .await?
+            use teloxide::prelude::Requester;
+            bot.send_message(msg.chat.id, {
+                use tufa_common::common::git::get_git_commit_link::GetGitCommitLink;
+                crate::global_variables::compile_time::git_info::GIT_INFO.get_git_commit_link()
+            })
+            .await?
         }
     };
 
