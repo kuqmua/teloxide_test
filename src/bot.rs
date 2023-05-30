@@ -2,20 +2,11 @@
 pub async fn start_bot() {
     pretty_env_logger::init();
     log::info!("Starting command bot...");
-    match reqwest::get("http://127.0.0.1:8080/api/cats/").await {
-        Ok(r) => {
-            println!("{r:#?}");
-            match r
-                .json::<Vec<tufa_common::repositories_types::tufa_server::routes::cats::Cat>>()
-                .await
-            {
-                Ok(vec_cats) => println!("ok2 {vec_cats:#?}"),
-                Err(ee) => println!("err2{ee:#?}"),
-            }
-            println!("ok");
-        }
-        Err(e) => println!("err{e:#?}"),
-    }
+    let result = tufa_common::repositories_types::tufa_server::routes::cats::try_get_cats(
+        std::string::String::from("http://127.0.0.1:8080"),
+    )
+    .await;
+    println!("{result:#?}");
     let bot = teloxide::Bot::from_env();
     teloxide::commands_repl(bot, answer, {
         use teloxide::utils::command::BotCommands;
