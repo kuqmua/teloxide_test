@@ -2,7 +2,7 @@
 pub async fn start_bot() {
     pretty_env_logger::init();
     log::info!("Starting command bot...");
-    let result = tufa_common::repositories_types::tufa_server::routes::cats::try_get(
+    let try_get_result = tufa_common::repositories_types::tufa_server::routes::cats::try_get(
         std::string::String::from("http://127.0.0.1:8080"),
         tufa_common::repositories_types::tufa_server::routes::cats::TryGetQueryParameters {
             limit: None,
@@ -11,7 +11,18 @@ pub async fn start_bot() {
         },
     )
     .await;
-    println!("{result:#?}");
+    println!("try_get_result{try_get_result:#?}");
+    //
+    let try_get_by_id_result =
+        tufa_common::repositories_types::tufa_server::routes::cats::try_get_by_id(
+            std::string::String::from("http://127.0.0.1:8080"),
+            tufa_common::repositories_types::tufa_server::routes::cats::TryGetByIdPathParameters {
+                id: 7,
+            },
+        )
+        .await;
+    println!("try_get_by_id_result{try_get_by_id_result:#?}");
+    //
     let bot = teloxide::Bot::from_env();
     teloxide::commands_repl(bot, answer, {
         use teloxide::utils::command::BotCommands;
