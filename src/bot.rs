@@ -2,26 +2,33 @@
 pub async fn start_bot() {
     pretty_env_logger::init();
     log::info!("Starting command bot...");
-    let try_get_result = tufa_common::repositories_types::tufa_server::routes::cats::try_get(
-        std::string::String::from("http://127.0.0.1:8080"),
+    match tufa_common::repositories_types::tufa_server::routes::cats::try_get(
+        std::string::String::from("http://127.0.0.1:8080/ll"),
         tufa_common::repositories_types::tufa_server::routes::cats::TryGetQueryParameters {
             limit: None,
             name: None,
             color: None,
         },
     )
-    .await;
-    println!("try_get_result{try_get_result:#?}");
-    //
-    let try_get_by_id_result =
-        tufa_common::repositories_types::tufa_server::routes::cats::try_get_by_id(
-            std::string::String::from("http://127.0.0.1:8080"),
-            tufa_common::repositories_types::tufa_server::routes::cats::TryGetByIdPathParameters {
-                id: 7,
-            },
-        )
-        .await;
-    println!("try_get_by_id_result{try_get_by_id_result:#?}");
+    .await
+    {
+        Ok(vec_cat) => println!("try_get_result\n{vec_cat:#?}"),
+        Err(e) => {
+            println!("try_get_result error\n{e}");
+            println!("try_get_result error\n{e:#?}")
+        }
+    }
+    match tufa_common::repositories_types::tufa_server::routes::cats::try_get_by_id(
+        std::string::String::from("http://127.0.0.1:8080"),
+        tufa_common::repositories_types::tufa_server::routes::cats::TryGetByIdPathParameters {
+            id: 7,
+        },
+    )
+    .await
+    {
+        Ok(cat) => println!("try_get_by_id\n{cat:#?}"),
+        Err(e) => println!("try_get_by_id error\n{e:#?}"),
+    }
     //
     let bot = teloxide::Bot::from_env();
     teloxide::commands_repl(bot, answer, {
