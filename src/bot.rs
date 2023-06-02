@@ -4,6 +4,11 @@ pub async fn start_bot() {
     log::info!("Starting command bot...");
     let result = tufa_common::repositories_types::tufa_server::routes::cats::try_get(
         std::string::String::from("http://127.0.0.1:8080"),
+        tufa_common::repositories_types::tufa_server::routes::cats::TryGetQueryParameters {
+            limit: None,
+            name: None,
+            color: None,
+        },
     )
     .await;
     println!("{result:#?}");
