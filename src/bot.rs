@@ -2,7 +2,7 @@
 pub async fn start_bot() {
     pretty_env_logger::init();
     log::info!("Starting command bot...");
-    let result = tufa_common::repositories_types::tufa_server::routes::cats::try_get_cats(
+    let result = tufa_common::repositories_types::tufa_server::routes::cats::try_get(
         std::string::String::from("http://127.0.0.1:8080"),
     )
     .await;
