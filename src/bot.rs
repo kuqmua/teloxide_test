@@ -44,6 +44,19 @@ pub async fn start_bot() {
         Err(e) => println!("try_post error\n{e:#?}"),
     }
     println!("--------------------------------");
+    match tufa_common::repositories_types::tufa_server::routes::cats::try_put(
+        std::string::String::from("http://127.0.0.1:8080"),
+        tufa_common::repositories_types::tufa_server::routes::cats::Cat {
+            id: 65,
+            name: String::from("testcatname"),
+            color: String::from("testcatcolor"),
+        },
+    )
+    .await
+    {
+        Ok(cat) => println!("try_put\n{cat:#?}"),
+        Err(e) => println!("try_put error\n{e:#?}"),
+    }
     //
     let bot = teloxide::Bot::from_env();
     teloxide::commands_repl(bot, answer, {
