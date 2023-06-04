@@ -34,8 +34,8 @@ pub async fn start_bot() {
     match tufa_common::repositories_types::tufa_server::routes::cats::try_post(
         std::string::String::from("http://127.0.0.1:8080"),
         tufa_common::repositories_types::tufa_server::routes::cats::CatToPost {
-            name: String::from("testcatname"),
-            color: String::from("testcatcolor"),
+            name: String::from("testcatnamepost"),
+            color: String::from("testcatcolorpost"),
         },
     )
     .await
@@ -48,8 +48,23 @@ pub async fn start_bot() {
         std::string::String::from("http://127.0.0.1:8080"),
         tufa_common::repositories_types::tufa_server::routes::cats::Cat {
             id: 65,
-            name: String::from("testcatname"),
-            color: String::from("testcatcolor"),
+            name: String::from("testcatnameput"),
+            color: String::from("testcatcolorput"),
+        },
+    )
+    .await
+    {
+        Ok(cat) => println!("try_put\n{cat:#?}"),
+        Err(e) => println!("try_put error\n{e:#?}"),
+    }
+    println!("--------------------------------");
+    //todo handle please use put
+    match tufa_common::repositories_types::tufa_server::routes::cats::try_patch(
+        std::string::String::from("http://127.0.0.1:8080"),
+        tufa_common::repositories_types::tufa_server::routes::cats::CatToPatch {
+            id: 65,
+            name: Some(String::from("testcatnamepatched")),
+            color: None,
         },
     )
     .await
