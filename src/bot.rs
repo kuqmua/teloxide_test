@@ -21,9 +21,7 @@ pub async fn start_bot() {
     println!("--------------------------------");
     match tufa_common::repositories_types::tufa_server::routes::cats::try_get_by_id(
         std::string::String::from("http://127.0.0.1:8080"),
-        tufa_common::repositories_types::tufa_server::routes::cats::TryGetByIdPathParameters {
-            id: 7,
-        },
+        tufa_common::repositories_types::tufa_server::routes::cats::GetByIdPathParameters { id: 7 },
     )
     .await
     {
@@ -40,7 +38,7 @@ pub async fn start_bot() {
     )
     .await
     {
-        Ok(cat) => println!("try_post\n{cat:#?}"),
+        Ok(_) => println!("try_post"),
         Err(e) => println!("try_post error\n{e:#?}"),
     }
     println!("--------------------------------");
@@ -54,7 +52,7 @@ pub async fn start_bot() {
     )
     .await
     {
-        Ok(cat) => println!("try_put\n{cat:#?}"),
+        Ok(_) => println!("try_put"),
         Err(e) => println!("try_put error\n{e:#?}"),
     }
     println!("--------------------------------");
@@ -69,7 +67,7 @@ pub async fn start_bot() {
     )
     .await
     {
-        Ok(cat) => println!("try_put\n{cat:#?}"),
+        Ok(_) => println!("try_put"),
         Err(e) => println!("try_put error\n{e:#?}"),
     }
     println!("--------------------------------");
@@ -82,8 +80,20 @@ pub async fn start_bot() {
     )
     .await
     {
-        Ok(cat) => println!("try_delete\n{cat:#?}"),
+        Ok(_) => println!("try_delete"),
         Err(e) => println!("try_delete error\n{e:#?}"),
+    }
+    println!("--------------------------------");
+    match tufa_common::repositories_types::tufa_server::routes::cats::try_delete_by_id(
+        std::string::String::from("http://127.0.0.1:8080"),
+        tufa_common::repositories_types::tufa_server::routes::cats::DeleteByIdPathParameters {
+            id: 45,
+        },
+    )
+    .await
+    {
+        Ok(_) => println!("try_delete_by_id"),
+        Err(e) => println!("try_delete_by_id error\n{e:#?}"),
     }
     //
     let bot = teloxide::Bot::from_env();
