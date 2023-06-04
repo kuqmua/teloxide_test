@@ -72,6 +72,19 @@ pub async fn start_bot() {
         Ok(cat) => println!("try_put\n{cat:#?}"),
         Err(e) => println!("try_put error\n{e:#?}"),
     }
+    println!("--------------------------------");
+    match tufa_common::repositories_types::tufa_server::routes::cats::try_delete(
+        std::string::String::from("http://127.0.0.1:8080"),
+        tufa_common::repositories_types::tufa_server::routes::cats::TryDeleteQueryParameters {
+            name: Some(String::from("testcatnamepost")),
+            color: None,
+        },
+    )
+    .await
+    {
+        Ok(cat) => println!("try_delete\n{cat:#?}"),
+        Err(e) => println!("try_delete error\n{e:#?}"),
+    }
     //
     let bot = teloxide::Bot::from_env();
     teloxide::commands_repl(bot, answer, {
