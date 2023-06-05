@@ -4,7 +4,7 @@ pub async fn start_bot() {
     log::info!("Starting command bot...");
     match tufa_common::repositories_types::tufa_server::routes::cats::try_get(
         std::string::String::from("http://127.0.0.1:8080"),
-        tufa_common::repositories_types::tufa_server::routes::cats::TryGetQueryParameters {
+        tufa_common::repositories_types::tufa_server::routes::cats::GetQueryParameters {
             limit: None,
             name: None,
             color: None,
@@ -73,7 +73,7 @@ pub async fn start_bot() {
     println!("--------------------------------");
     match tufa_common::repositories_types::tufa_server::routes::cats::try_delete(
         std::string::String::from("http://127.0.0.1:8080"),
-        tufa_common::repositories_types::tufa_server::routes::cats::TryDeleteQueryParameters {
+        tufa_common::repositories_types::tufa_server::routes::cats::DeleteQueryParameters {
             name: Some(String::from("testcatnamepost")),
             color: None,
         },
