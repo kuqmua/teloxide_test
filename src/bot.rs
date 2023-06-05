@@ -67,8 +67,8 @@ pub async fn start_bot() {
     )
     .await
     {
-        Ok(_) => println!("try_put"),
-        Err(e) => println!("try_put error\n{e:#?}"),
+        Ok(_) => println!("try_patch"),
+        Err(e) => println!("try_patch error\n{e:#?}"),
     }
     println!("--------------------------------");
     match tufa_common::repositories_types::tufa_server::routes::cats::try_delete(
