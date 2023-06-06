@@ -2,9 +2,9 @@
 pub async fn start_bot() {
     pretty_env_logger::init();
     log::info!("Starting command bot...");
-    match tufa_common::repositories_types::tufa_server::routes::cats::try_get(
+    match tufa_common::repositories_types::tufa_server::routes::api::cats::try_get(
         std::string::String::from("http://127.0.0.1:8080"),
-        tufa_common::repositories_types::tufa_server::routes::cats::GetQueryParameters {
+        tufa_common::repositories_types::tufa_server::routes::api::cats::GetQueryParameters {
             limit: None,
             name: None,
             color: None,
@@ -19,9 +19,11 @@ pub async fn start_bot() {
         }
     }
     println!("--------------------------------");
-    match tufa_common::repositories_types::tufa_server::routes::cats::try_get_by_id(
+    match tufa_common::repositories_types::tufa_server::routes::api::cats::try_get_by_id(
         std::string::String::from("http://127.0.0.1:8080"),
-        tufa_common::repositories_types::tufa_server::routes::cats::GetByIdPathParameters { id: 7 },
+        tufa_common::repositories_types::tufa_server::routes::api::cats::GetByIdPathParameters {
+            id: 7,
+        },
     )
     .await
     {
@@ -29,9 +31,9 @@ pub async fn start_bot() {
         Err(e) => println!("try_get_by_id error\n{e:#?}"),
     }
     println!("--------------------------------");
-    match tufa_common::repositories_types::tufa_server::routes::cats::try_post(
+    match tufa_common::repositories_types::tufa_server::routes::api::cats::try_post(
         std::string::String::from("http://127.0.0.1:8080"),
-        tufa_common::repositories_types::tufa_server::routes::cats::CatToPost {
+        tufa_common::repositories_types::tufa_server::routes::api::cats::CatToPost {
             name: String::from("testcatnamepost"),
             color: String::from("testcatcolorpost"),
         },
@@ -42,9 +44,9 @@ pub async fn start_bot() {
         Err(e) => println!("try_post error\n{e:#?}"),
     }
     println!("--------------------------------");
-    match tufa_common::repositories_types::tufa_server::routes::cats::try_put(
+    match tufa_common::repositories_types::tufa_server::routes::api::cats::try_put(
         std::string::String::from("http://127.0.0.1:8080"),
-        tufa_common::repositories_types::tufa_server::routes::cats::Cat {
+        tufa_common::repositories_types::tufa_server::routes::api::cats::Cat {
             id: 65,
             name: String::from("testcatnameput"),
             color: String::from("testcatcolorput"),
@@ -57,9 +59,9 @@ pub async fn start_bot() {
     }
     println!("--------------------------------");
     //todo handle please use put
-    match tufa_common::repositories_types::tufa_server::routes::cats::try_patch(
+    match tufa_common::repositories_types::tufa_server::routes::api::cats::try_patch(
         std::string::String::from("http://127.0.0.1:8080"),
-        tufa_common::repositories_types::tufa_server::routes::cats::CatToPatch {
+        tufa_common::repositories_types::tufa_server::routes::api::cats::CatToPatch {
             id: 65,
             name: Some(String::from("testcatnamepatched")),
             color: None,
@@ -71,9 +73,9 @@ pub async fn start_bot() {
         Err(e) => println!("try_patch error\n{e:#?}"),
     }
     println!("--------------------------------");
-    match tufa_common::repositories_types::tufa_server::routes::cats::try_delete(
+    match tufa_common::repositories_types::tufa_server::routes::api::cats::try_delete(
         std::string::String::from("http://127.0.0.1:8080"),
-        tufa_common::repositories_types::tufa_server::routes::cats::DeleteQueryParameters {
+        tufa_common::repositories_types::tufa_server::routes::api::cats::DeleteQueryParameters {
             name: Some(String::from("testcatnamepost")),
             color: None,
         },
@@ -84,9 +86,9 @@ pub async fn start_bot() {
         Err(e) => println!("try_delete error\n{e:#?}"),
     }
     println!("--------------------------------");
-    match tufa_common::repositories_types::tufa_server::routes::cats::try_delete_by_id(
+    match tufa_common::repositories_types::tufa_server::routes::api::cats::try_delete_by_id(
         std::string::String::from("http://127.0.0.1:8080"),
-        tufa_common::repositories_types::tufa_server::routes::cats::DeleteByIdPathParameters {
+        tufa_common::repositories_types::tufa_server::routes::api::cats::DeleteByIdPathParameters {
             id: 45,
         },
     )
