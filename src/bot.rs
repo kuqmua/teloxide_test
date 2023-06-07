@@ -61,10 +61,9 @@ pub async fn start_bot() {
     //todo handle please use put
     match tufa_common::repositories_types::tufa_server::routes::api::cats::try_patch(
         std::string::String::from("http://127.0.0.1:8080"),
-        tufa_common::repositories_types::tufa_server::routes::api::cats::CatToPatch {
+        tufa_common::repositories_types::tufa_server::routes::api::cats::CatToPatch::IdName {
             id: 65,
-            name: Some(String::from("testcatnamepatched")),
-            color: None,
+            name: String::from("testcatnamepatched"),
         },
     )
     .await
