@@ -17,7 +17,6 @@ serde-xml-rs = {version = "=0.6.0"}
 serde_derive = {version = "=1.0"}
 serde_json = {version = "=1.0"}
 # tufa_common = {git = "https://github.com/kuqmua/tufa_common"}# git version
-check_specific_dependency_version_usage = {path = "../proc_macros/check_specific_dependency_version_usage"}
 compile_time_git_info = {path = "../proc_macros/compile_time_git_info"}
 tufa_common = {path = "../tufa_common"}# local dev test without commits version
 user_port_try_from_u16 = {path = "../proc_macros/user_port_try_from_u16"}
