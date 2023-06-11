@@ -2,27 +2,53 @@
 pub async fn start_bot() {
     pretty_env_logger::init();
     log::info!("Starting command bot...");
-    match tufa_common::repositories_types::tufa_server::routes::api::cats::try_get(
-        std::string::String::from("http://127.0.0.1:8080"),
-        tufa_common::repositories_types::tufa_server::routes::api::cats::GetQueryParameters {
-            limit: None,
-            name: None,
-            color: None,
-        },
-    )
-    .await
-    {
-        Ok(vec_cat) => println!("try_get_result\n{vec_cat:#?}"),
-        Err(e) => {
-            println!("try_get_result error\n{e}");
-            println!("try_get_result error\n{e:#?}")
-        }
-    }
+    // match tufa_common::repositories_types::tufa_server::routes::api::cats::try_get(
+    //     std::string::String::from("http://127.0.0.1:8080"),
+    //     tufa_common::repositories_types::tufa_server::routes::api::cats::GetQueryParameters {
+    //         limit: None,
+    //         name: None,
+    //         color: None,
+    //     },
+    // )
+    // .await
+    // {
+    //     Ok(vec_cat) => println!("try_get_result\n{vec_cat:#?}"),
+    //     Err(e) => {
+    //         println!("try_get_result error\n{e}");
+    //         println!("try_get_result error\n{e:#?}")
+    //     }
+    // }
     // println!("--------------------------------");
+    //
+
+    let url = format!("http://127.0.0.1:8080/api/cats/1");
+    match reqwest::Client::new()
+        .get(&url)
+        .header(
+            tufa_common::common::git::project_git_info::PROJECT_COMMIT,
+            tufa_common::global_variables::compile_time::project_git_info::PROJECT_GIT_INFO
+                .project_commit,
+        )
+        .send()
+        .await
+    {
+        Ok(r) => match r.json::<tufa_common::repositories_types::tufa_server::routes::api::cats::GetByIdErrorNamedWithSerializeDeserialize>().await {
+            Ok(vec_cats) => {
+                println!("{vec_cats:#?}");
+            }
+            Err(e) => {
+                println!("334");
+            }
+        },
+        Err(e) => {
+            println!("42");
+        }
+    };
+    //
     // match tufa_common::repositories_types::tufa_server::routes::api::cats::try_get_by_id(
     //     std::string::String::from("http://127.0.0.1:8080"),
     //     tufa_common::repositories_types::tufa_server::routes::api::cats::GetByIdPathParameters {
-    //         id: 7,
+    //         id: 8,
     //     },
     // )
     // .await
@@ -97,71 +123,71 @@ pub async fn start_bot() {
     //     Err(e) => println!("try_delete_by_id error\n{e:#?}"),
     // }
     //
-    let bot = teloxide::Bot::from_env();
-    teloxide::commands_repl(bot, answer, {
-        use teloxide::utils::command::BotCommands;
-        Command::ty()
-    })
-    .await;
+    // let bot = teloxide::Bot::from_env();
+    // teloxide::commands_repl(bot, answer, {
+    //     use teloxide::utils::command::BotCommands;
+    //     Command::ty()
+    // })
+    // .await;
 }
 
-#[derive(teloxide::utils::command::BotCommands, Clone)]
-#[command(
-    rename_rule = "lowercase",
-    description = "These commands are supported:"
-)]
-enum Command {
-    #[command(description = "display this text.")]
-    Help,
-    #[command(description = "handle a username.")]
-    Username(String),
-    #[command(description = "handle a username and an age.", parse_with = "split")]
-    UsernameAndAge { username: String, age: u8 },
-    #[command(description = "show bot source code info ")]
-    GitInfo,
-}
+// #[derive(teloxide::utils::command::BotCommands, Clone)]
+// #[command(
+//     rename_rule = "lowercase",
+//     description = "These commands are supported:"
+// )]
+// enum Command {
+//     #[command(description = "display this text.")]
+//     Help,
+//     #[command(description = "handle a username.")]
+//     Username(String),
+//     #[command(description = "handle a username and an age.", parse_with = "split")]
+//     UsernameAndAge { username: String, age: u8 },
+//     #[command(description = "show bot source code info ")]
+//     GitInfo,
+// }
 
-async fn answer(
-    bot: teloxide::Bot,
-    msg: teloxide::types::Message,
-    cmd: Command,
-) -> teloxide::requests::ResponseResult<()> {
-    log::info!("answer");
-    match cmd {
-        Command::Help => {
-            use teloxide::prelude::Requester;
-            bot.send_message(
-                msg.chat.id,
-                {
-                    use teloxide::utils::command::BotCommands;
-                    Command::descriptions()
-                }
-                .to_string(),
-            )
-            .await?
-        }
-        Command::Username(username) => {
-            use teloxide::prelude::Requester;
-            bot.send_message(msg.chat.id, format!("Your username is @{username}."))
-                .await?
-        }
-        Command::UsernameAndAge { username, age } => {
-            use teloxide::prelude::Requester;
-            bot.send_message(
-                msg.chat.id,
-                format!("Your username is @{username} and age is {age}."),
-            )
-            .await?
-        }
-        Command::GitInfo => {
-            use teloxide::prelude::Requester;
-            bot.send_message(msg.chat.id, {
-                use tufa_common::common::git::get_git_commit_link::GetGitCommitLink;
-                crate::global_variables::compile_time::git_info::GIT_INFO.get_git_commit_link()
-            })
-            .await?
-        }
-    };
+// async fn answer(
+//     bot: teloxide::Bot,
+//     msg: teloxide::types::Message,
+//     cmd: Command,
+// ) -> teloxide::requests::ResponseResult<()> {
+//     log::info!("answer");
+//     match cmd {
+//         Command::Help => {
+//             use teloxide::prelude::Requester;
+//             bot.send_message(
+//                 msg.chat.id,
+//                 {
+//                     use teloxide::utils::command::BotCommands;
+//                     Command::descriptions()
+//                 }
+//                 .to_string(),
+//             )
+//             .await?
+//         }
+//         Command::Username(username) => {
+//             use teloxide::prelude::Requester;
+//             bot.send_message(msg.chat.id, format!("Your username is @{username}."))
+//                 .await?
+//         }
+//         Command::UsernameAndAge { username, age } => {
+//             use teloxide::prelude::Requester;
+//             bot.send_message(
+//                 msg.chat.id,
+//                 format!("Your username is @{username} and age is {age}."),
+//             )
+//             .await?
+//         }
+//         Command::GitInfo => {
+//             use teloxide::prelude::Requester;
+//             bot.send_message(msg.chat.id, {
+//                 use tufa_common::common::git::get_git_commit_link::GetGitCommitLink;
+//                 crate::global_variables::compile_time::git_info::GIT_INFO.get_git_commit_link()
+//             })
+//             .await?
+//         }
+//     };
 
-    Ok(())
-}
+//     Ok(())
+// }
