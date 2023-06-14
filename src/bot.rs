@@ -21,42 +21,52 @@ pub async fn start_bot() {
     // println!("--------------------------------");
     //
 
-    let url = format!("http://127.0.0.1:8080/api/cats/1");
-    match reqwest::Client::new()
-        .get(&url)
-        .header(
-            tufa_common::common::git::project_git_info::PROJECT_COMMIT,
-            tufa_common::global_variables::compile_time::project_git_info::PROJECT_GIT_INFO
-                .project_commit,
-        )
-        .send()
-        .await
-    {
-        Ok(r) => match r.json::<tufa_common::repositories_types::tufa_server::routes::api::cats::GetByIdErrorNamedWithSerializeDeserialize>().await {
-            Ok(vec_cats) => {
-                println!("{vec_cats:#?}");
-            }
-            Err(e) => {
-                println!("334");
-            }
-        },
-        Err(e) => {
-            println!("42");
-        }
-    };
-    //
-    // match tufa_common::repositories_types::tufa_server::routes::api::cats::try_get_by_id(
-    //     std::string::String::from("http://127.0.0.1:8080"),
-    //     tufa_common::repositories_types::tufa_server::routes::api::cats::GetByIdPathParameters {
-    //         id: 8,
-    //     },
-    // )
-    // .await
+    // let url = format!("http://127.0.0.1:8080/api/cats/1");
+    // match reqwest::Client::new()
+    //     .get(&url)
+    //     .header(
+    //         tufa_common::common::git::project_git_info::PROJECT_COMMIT,
+    //         tufa_common::global_variables::compile_time::project_git_info::PROJECT_GIT_INFO
+    //             .project_commit,
+    //     )
+    //     .send()
+    //     .await
     // {
-    //     Ok(cat) => println!("try_get_by_id\n{cat:#?}"),
-    //     Err(e) => println!("try_get_by_id error\n{e:#?}"),
+    //     Ok(r) => match r.json::<tufa_common::repositories_types::tufa_server::routes::api::cats::GetByIdErrorNamedWithSerializeDeserialize>().await {
+    //         Ok(vec_cats) => {
+    //             println!("{vec_cats:#?}");
+    //         }
+    //         Err(e) => {
+    //             println!("334");
+    //         }
+    //     },
+    //     Err(e) => {
+    //         println!("42");
+    //     }
+    // };
+    //
+    println!("trying to ");
+    //todo something wrong with deserialize print
+    // try_get_by_id error
+    // {
+    //  expected_server_error: {
+    //   postgres_select: pool timed out while waiting for an open connection
+    //  }
+    //  554a02ceaf414c7575c4027c7e5537d2b29ab5dc/blob/554a02ceaf414c7575c4027c7e5537d2b29ab5dc/src/routes/api/cats/mod.rs#L162 2023-06-14 20:21:55
     // }
-    // println!("--------------------------------");
+    // src/tufa_common/src/repositories_types/tufa_server/routes/api/cats/mod.rs:382:45 2023-06-14 20:21:55
+    match tufa_common::repositories_types::tufa_server::routes::api::cats::try_get_by_id(
+        std::string::String::from("http://127.0.0.1:8080"),
+        tufa_common::repositories_types::tufa_server::routes::api::cats::GetByIdPathParameters {
+            id: 8,
+        },
+    )
+    .await
+    {
+        Ok(cat) => println!("try_get_by_id\n{cat:#?}"),
+        Err(e) => println!("try_get_by_id error\n{e}"),
+    }
+    println!("--------------------------------");
     // match tufa_common::repositories_types::tufa_server::routes::api::cats::try_post(
     //     std::string::String::from("http://127.0.0.1:8080"),
     //     tufa_common::repositories_types::tufa_server::routes::api::cats::CatToPost {
