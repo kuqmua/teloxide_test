@@ -5,17 +5,18 @@ pub async fn start_bot() {
     match tufa_common::repositories_types::tufa_server::routes::api::cats::get::request::try_get(
         std::string::String::from("http://127.0.0.1:8080"),
         tufa_common::repositories_types::tufa_server::routes::api::cats::get::GetQueryParameters {
-            limit: None,
+            limit: Some(10),
             name: None,
             color: None,
         },
     )
     .await
     {
-        Ok(vec_cat) => println!("try_get_result\n{vec_cat:#?}"),
+        Ok(vec_cat) => {
+            println!("try_get_result\n{vec_cat:#?}");
+        }
         Err(e) => {
             println!("try_get_result error\n{e}");
-            println!("try_get_result error\n{e:#?}")
         }
     }
     println!("--------------------------------");
