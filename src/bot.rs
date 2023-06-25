@@ -16,6 +16,7 @@ pub async fn start_bot() {
             println!("try_get_result\n{vec_cat:#?}");
         }
         Err(e) => {
+            println!("try_get_result error\n{e:#?}");
             println!("try_get_result error\n{e}");
         }
     }
@@ -46,7 +47,7 @@ pub async fn start_bot() {
     //     }
     // };
     //
-    println!("trying to ");
+    // println!("trying to ");
     //todo something wrong with deserialize print
     // try_get_by_id error
     // {
