@@ -3,7 +3,7 @@ pub async fn start_bot() {
     pretty_env_logger::init();
     log::info!("Starting command bot...");
     match tufa_common::repositories_types::tufa_server::routes::api::cats::get::request::try_get(
-        std::string::String::from("http://127.0.0.1:8080"),
+        "http://127.0.0.1:8080",
         tufa_common::repositories_types::tufa_server::routes::api::cats::get::GetQueryParameters {
             limit: Some(10),
             name: None,
@@ -16,26 +16,26 @@ pub async fn start_bot() {
             println!("try_get_result\n{vec_cat:#?}");
         }
         Err(e) => {
-            println!("try_get_result error\n{e:#?}");
+            // println!("try_get_result error\n{e:#?}");
             println!("try_get_result error\n{e}");
         }
     }
     println!("--------------------------------");
-    match tufa_common::repositories_types::tufa_server::routes::api::cats::get_by_id::request::try_get_by_id(
-        std::string::String::from("http://127.0.0.1:8080"),
-        tufa_common::repositories_types::tufa_server::routes::api::cats::get_by_id::GetByIdPathParameters {
-            id: 65,
-        },
-    )
-    .await
-    {
-        Ok(cat) => println!("try_get_by_id\n{cat:#?}"),
-        Err(e) => {
-            println!("{e:#?}");
-            println!("try_get_by_id error\n{e}")
-        }
-    }
-    println!("--------------------------------");
+    // match tufa_common::repositories_types::tufa_server::routes::api::cats::get_by_id::request::try_get_by_id(
+    //     std::string::String::from("http://127.0.0.1:8080"),
+    //     tufa_common::repositories_types::tufa_server::routes::api::cats::get_by_id::GetByIdPathParameters {
+    //         id: 65,
+    //     },
+    // )
+    // .await
+    // {
+    //     Ok(cat) => println!("try_get_by_id\n{cat:#?}"),
+    //     Err(e) => {
+    //         println!("{e:#?}");
+    //         println!("try_get_by_id error\n{e}")
+    //     }
+    // }
+    // println!("--------------------------------");
     // match tufa_common::repositories_types::tufa_server::routes::api::cats::try_post(
     //     std::string::String::from("http://127.0.0.1:8080"),
     //     tufa_common::repositories_types::tufa_server::routes::api::cats::CatToPost {
