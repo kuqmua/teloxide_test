@@ -2,7 +2,7 @@
 pub async fn start_bot() {
     pretty_env_logger::init();
     log::info!("Starting command bot...");
-    match tufa_common::repositories_types::tufa_server::routes::api::cats::get::request::try_get(
+    match tufa_common::repositories_types::tufa_server::routes::api::cats::get::try_get(
         "http://127.0.0.1:8080",
         tufa_common::repositories_types::tufa_server::routes::api::cats::get::GetQueryParameters {
             limit: Some(10),
