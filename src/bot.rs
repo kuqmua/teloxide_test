@@ -3,7 +3,7 @@ pub async fn start_bot() {
     pretty_env_logger::init();
     log::info!("Starting command bot...");
     match tufa_common::repositories_types::tufa_server::routes::api::cats::get::try_get(
-        "http://127.0.0.1:8080",
+        &std::string::String::from("http://127.0.0.1:8080"),
         tufa_common::repositories_types::tufa_server::routes::api::cats::get::GetQueryParameters {
             limit: Some(10),
             name: None,
@@ -36,19 +36,19 @@ pub async fn start_bot() {
     //     }
     // }
     // println!("--------------------------------");
-    // match tufa_common::repositories_types::tufa_server::routes::api::cats::try_post(
-    //     std::string::String::from("http://127.0.0.1:8080"),
-    //     tufa_common::repositories_types::tufa_server::routes::api::cats::CatToPost {
-    //         name: String::from("testcatnamepost"),
-    //         color: String::from("testcatcolorpost"),
-    //     },
-    // )
-    // .await
-    // {
-    //     Ok(_) => println!("try_post"),
-    //     Err(e) => println!("try_post error\n{e:#?}"),
-    // }
-    // println!("--------------------------------");
+    match tufa_common::repositories_types::tufa_server::routes::api::cats::post::try_post(
+        &std::string::String::from("http://127.0.0.1:8080"),
+        tufa_common::repositories_types::tufa_server::routes::api::cats::post::CatToPost {
+            name: String::from("testcatnamepost"),
+            color: String::from("testcatcolorpost"),
+        },
+    )
+    .await
+    {
+        Ok(_) => println!("try_post"),
+        Err(e) => println!("try_post error\n{e:#?}"),
+    }
+    println!("--------------------------------");
     // match tufa_common::repositories_types::tufa_server::routes::api::cats::try_put(
     //     std::string::String::from("http://127.0.0.1:8080"),
     //     tufa_common::repositories_types::tufa_server::routes::api::cats::Cat {
