@@ -17,25 +17,24 @@ pub async fn start_bot() {
         }
         Err(e) => {
             // println!("try_get_result error\n{e:#?}");
-            println!("try_get_result error\n{e}");
+            println!("try_get_result\n{e}");
         }
     }
     println!("--------------------------------");
-    // match tufa_common::repositories_types::tufa_server::routes::api::cats::get_by_id::request::try_get_by_id(
-    //     std::string::String::from("http://127.0.0.1:8080"),
-    //     tufa_common::repositories_types::tufa_server::routes::api::cats::get_by_id::GetByIdPathParameters {
-    //         id: 65,
-    //     },
-    // )
-    // .await
-    // {
-    //     Ok(cat) => println!("try_get_by_id\n{cat:#?}"),
-    //     Err(e) => {
-    //         println!("{e:#?}");
-    //         println!("try_get_by_id error\n{e}")
-    //     }
-    // }
-    // println!("--------------------------------");
+    match tufa_common::repositories_types::tufa_server::routes::api::cats::get_by_id::try_get_by_id(
+        &std::string::String::from("http://127.0.0.1:8080"),
+        tufa_common::repositories_types::tufa_server::routes::api::cats::get_by_id::GetByIdPathParameters {
+            id: 65,
+        },
+    )
+    .await
+    {
+        Ok(cat) => println!("try_get_by_id\n{cat:#?}"),
+        Err(e) => {
+            println!("try_get_by_id\n{e}")
+        }
+    }
+    println!("--------------------------------");
     match tufa_common::repositories_types::tufa_server::routes::api::cats::post::try_post(
         &std::string::String::from("http://127.0.0.1:8080"),
         tufa_common::repositories_types::tufa_server::routes::api::cats::post::CatToPost {
@@ -46,7 +45,9 @@ pub async fn start_bot() {
     .await
     {
         Ok(_) => println!("try_post"),
-        Err(e) => println!("try_post error\n{e:#?}"),
+        Err(e) => {
+            println!("try_post\n{e:#?}")
+        }
     }
     println!("--------------------------------");
     // match tufa_common::repositories_types::tufa_server::routes::api::cats::try_put(
