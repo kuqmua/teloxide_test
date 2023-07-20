@@ -49,21 +49,20 @@ pub async fn start_bot() {
             println!("{e:#?}")
         }
     }
-
-    // match tufa_common::repositories_types::tufa_server::routes::api::cats::try_put(
-    //     std::string::String::from("http://127.0.0.1:8080"),
-    //     tufa_common::repositories_types::tufa_server::routes::api::cats::Cat {
-    //         id: 65,
-    //         name: String::from("testcatnameput"),
-    //         color: String::from("testcatcolorput"),
-    //     },
-    // )
-    // .await
-    // {
-    //     Ok(_) => println!("try_put"),
-    //     Err(e) => println!("try_put error\n{e:#?}"),
-    // }
-    // println!("--------------------------------");
+    println!("--------------try_put------------------");
+    match tufa_common::repositories_types::tufa_server::routes::api::cats::put::try_put(
+        &std::string::String::from("http://127.0.0.1:8080"),
+        tufa_common::repositories_types::tufa_server::routes::api::cats::Cat {
+            id: 65,
+            name: String::from("testcatnameput"),
+            color: String::from("testcatcolorput"),
+        },
+    )
+    .await
+    {
+        Ok(_) => (),
+        Err(e) => println!("{e}"),
+    }
     // //todo handle please use put
     println!("--------------try_patch------------------");
     match tufa_common::repositories_types::tufa_server::routes::api::cats::patch::try_patch(
