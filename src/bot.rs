@@ -77,20 +77,19 @@ pub async fn start_bot() {
         Ok(_) => (),
         Err(e) => println!("{e}"),
     }
-
-    // match tufa_common::repositories_types::tufa_server::routes::api::cats::try_delete(
-    //     std::string::String::from("http://127.0.0.1:8080"),
-    //     tufa_common::repositories_types::tufa_server::routes::api::cats::DeleteQueryParameters {
-    //         name: Some(String::from("testcatnamepost")),
-    //         color: None,
-    //     },
-    // )
-    // .await
-    // {
-    //     Ok(_) => println!("try_delete"),
-    //     Err(e) => println!("try_delete error\n{e:#?}"),
-    // }
-    // println!("--------------------------------");
+    println!("--------------try_delete------------------");
+    match tufa_common::repositories_types::tufa_server::routes::api::cats::delete::try_delete(
+        &std::string::String::from("http://127.0.0.1:8080"),
+        tufa_common::repositories_types::tufa_server::routes::api::cats::delete::DeleteQueryParameters {
+            name: Some(String::from("testcatnamepost")),
+            color: None,
+        },
+    )
+    .await
+    {
+        Ok(_) => (),
+        Err(e) => println!("{e}"),
+    }
     // match tufa_common::repositories_types::tufa_server::routes::api::cats::try_delete_by_id(
     //     std::string::String::from("http://127.0.0.1:8080"),
     //     tufa_common::repositories_types::tufa_server::routes::api::cats::DeleteByIdPathParameters {
