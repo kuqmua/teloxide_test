@@ -90,18 +90,19 @@ pub async fn start_bot() {
         Ok(_) => (),
         Err(e) => println!("{e}"),
     }
-    // match tufa_common::repositories_types::tufa_server::routes::api::cats::try_delete_by_id(
-    //     std::string::String::from("http://127.0.0.1:8080"),
-    //     tufa_common::repositories_types::tufa_server::routes::api::cats::DeleteByIdPathParameters {
-    //         id: 45,
-    //     },
-    // )
-    // .await
-    // {
-    //     Ok(_) => println!("try_delete_by_id"),
-    //     Err(e) => println!("try_delete_by_id error\n{e:#?}"),
-    // }
-    //
+    println!("--------------try_delete_by_id------------------");
+    match tufa_common::repositories_types::tufa_server::routes::api::cats::delete_by_id::try_delete_by_id(
+        &std::string::String::from("http://127.0.0.1:8080"),
+        tufa_common::repositories_types::tufa_server::routes::api::cats::delete_by_id::DeleteByIdPathParameters {
+            id: 65,
+        },
+    )
+    .await
+    {
+        Ok(_) => (),
+        Err(e) => println!("{e}"),
+    }
+
     // let bot = teloxide::Bot::from_env();
     // teloxide::commands_repl(bot, answer, {
     //     use teloxide::utils::command::BotCommands;
