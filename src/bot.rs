@@ -14,8 +14,28 @@ pub async fn start_bot() {
     )
     .await
     {
-        Ok(vec_cat) => {
-            println!("{vec_cat:#?}");
+        Ok(vec_cat_options) => {
+            let vec_cat_options_len = vec_cat_options.len();
+            println!("{vec_cat_options:#?}");
+            let vec_cat_id: Vec<
+                tufa_common::repositories_types::tufa_server::routes::api::cats::CatId,
+            > = vec_cat_options
+                .into_iter()
+                .filter_map(|value| match value.id {
+                    Some(id) => Some(
+                        tufa_common::repositories_types::tufa_server::routes::api::cats::CatId {
+                            id,
+                        },
+                    ),
+                    None => None,
+                })
+                .collect();
+            let vec_cat_id_len = vec_cat_id.len();
+            println!("{vec_cat_id:#?}");
+            println!(
+                "vec_cat_options_len == vec_cat_id_len {}",
+                vec_cat_options_len == vec_cat_id_len
+            );
         }
         Err(e) => {
             println!("{e}");
