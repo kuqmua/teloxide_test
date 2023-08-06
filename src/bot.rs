@@ -5,11 +5,15 @@ pub async fn start_bot() {
     println!("---------------try_get_result-----------------");
     match tufa_common::repositories_types::tufa_server::routes::api::cats::get::try_get(
         &std::string::String::from("http://127.0.0.1:8080"),
+        //todo - builder pattern?
         tufa_common::repositories_types::tufa_server::routes::api::cats::GetQueryParameters {
             limit: Some(10),
+            id: Some(65),
             name: None,
             color: None,
-            select: tufa_common::repositories_types::tufa_server::routes::api::cats::GetSelect::Id,
+            select: Some(
+                tufa_common::repositories_types::tufa_server::routes::api::cats::GetSelect::Id,
+            ),
         },
     )
     .await
