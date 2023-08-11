@@ -8,14 +8,11 @@ pub async fn start_bot() {
         //todo - builder pattern?
         tufa_common::repositories_types::tufa_server::routes::api::cats::GetQueryParameters {
             limit: 10,
-            id: Some(
-                tufa_common::repositories_types::tufa_server::routes::api::cats::BigserialIds(
-                    vec![
-                        tufa_common::server::postgres::bigserial::Bigserial::try_from_i64(65)
-                            .unwrap(),
-                    ],
-                ),
-            ),
+            id: Some(tufa_common::server::postgres::bigserial_ids::BigserialIds(
+                vec![
+                    tufa_common::server::postgres::bigserial::Bigserial::try_from_i64(65).unwrap(),
+                ],
+            )),
             name: None,
             color: None,
             select: Some(
