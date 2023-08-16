@@ -37,7 +37,6 @@ pub async fn start_bot() {
                 })
                 .collect();
             let vec_cat_id_len = vec_cat_id.len();
-            println!("{vec_cat_id:#?}");
             println!(
                 "vec_cat_options_len == vec_cat_id_len {}",
                 vec_cat_options_len == vec_cat_id_len
