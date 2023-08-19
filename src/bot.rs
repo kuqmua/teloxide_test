@@ -14,7 +14,7 @@ pub async fn start_bot() {
             name: None,
             color: None,
             select: Some(
-                tufa_common::repositories_types::tufa_server::routes::api::cats::GetSelect::Id,
+                tufa_common::repositories_types::tufa_server::routes::api::cats::CatSelect::Id,
             ),
         },
     )
