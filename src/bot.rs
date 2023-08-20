@@ -93,7 +93,7 @@ pub async fn start_bot() {
     // println!("--------------try_patch------------------");
     // match tufa_common::repositories_types::tufa_server::routes::api::cats::patch::try_patch(
     //     &std::string::String::from("http://127.0.0.1:8080"),
-    //     tufa_common::repositories_types::tufa_server::routes::api::cats::CatToPatch::IdName {
+    //     tufa_common::repositories_types::tufa_server::routes::api::cats::CatToPatchById::IdName {
     //         id: 65,
     //         name: String::from("testcatnamepatched"),
     //     },
