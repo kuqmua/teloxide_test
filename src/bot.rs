@@ -18,7 +18,7 @@ pub async fn start_bot() {
             color: None,
             order_by: Some(tufa_common::repositories_types::tufa_server::routes::api::cats::CatOrderByWrapper(
                 tufa_common::repositories_types::tufa_server::routes::api::cats::CatOrderBy { 
-                    column: tufa_common::repositories_types::tufa_server::routes::api::cats::CatOrderByField::Id, 
+                    column: tufa_common::repositories_types::tufa_server::routes::api::cats::CatOrderByColumn::Id, 
                     order: Some(tufa_common::server::postgres::order::Order::Asc) 
                 }
             )),
