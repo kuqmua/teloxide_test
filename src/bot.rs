@@ -7,22 +7,30 @@ pub async fn start_bot() {
         &std::string::String::from("http://127.0.0.1:8080"),
         //todo - builder pattern?
         tufa_common::repositories_types::tufa_server::routes::api::cats::GetQueryParameters {
-            limit: 10,
-            id: Some(tufa_common::server::postgres::bigserial_ids::BigserialIds(
-                vec![tufa_common::server::postgres::bigserial::Bigserial::try_from(65).unwrap()],
-            )),
-            name: None,
-            color: None,
             select: Some(
                 tufa_common::repositories_types::tufa_server::routes::api::cats::CatSelect::Id,
             ),
+            id: None,
+            // Some(tufa_common::server::postgres::bigserial_ids::BigserialIds(
+            //     vec![tufa_common::server::postgres::bigserial::Bigserial::try_from(65).unwrap()],
+            // ))
+            name: None,
+            color: None,
+            order_by: Some(tufa_common::repositories_types::tufa_server::routes::api::cats::CatOrderByWrapper(
+                tufa_common::repositories_types::tufa_server::routes::api::cats::CatOrderBy { 
+                    column: tufa_common::repositories_types::tufa_server::routes::api::cats::CatOrderByField::Id, 
+                    order: Some(tufa_common::server::postgres::order::Order::Asc) 
+                }
+            )),
+            limit: tufa_common::server::postgres::postgres_number::PostgresNumber(10),
+            offset: Some(tufa_common::server::postgres::postgres_number::PostgresNumber(1)),  
         },
     )
     .await
     {
         Ok(vec_cat_options) => {
-            let vec_cat_options_len = vec_cat_options.len();
-            println!("{vec_cat_options:#?}");
+            // let vec_cat_options_len = vec_cat_options.len();
+            // println!("{vec_cat_options:#?}");
             let vec_cat_id: Vec<
                 tufa_common::repositories_types::tufa_server::routes::api::cats::CatId,
             > = vec_cat_options
@@ -36,11 +44,12 @@ pub async fn start_bot() {
                     None => None,
                 })
                 .collect();
-            let vec_cat_id_len = vec_cat_id.len();
-            println!(
-                "vec_cat_options_len == vec_cat_id_len {}",
-                vec_cat_options_len == vec_cat_id_len
-            );
+            // let vec_cat_id_len = vec_cat_id.len();
+            println!("{vec_cat_id:#?}");
+            // println!(
+            //     "vec_cat_options_len == vec_cat_id_len {}",
+            //     vec_cat_options_len == vec_cat_id_len
+            // );
         }
         Err(e) => {
             println!("{e}");
