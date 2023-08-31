@@ -9,11 +9,11 @@ pub async fn start_bot() {
         tufa_common::repositories_types::tufa_server::routes::api::cats::CatToPostSearch { 
             select: tufa_common::repositories_types::tufa_server::routes::api::cats::CatColumnSelectVariants::Id,
             ids: Some(vec![tufa_common::server::postgres::bigserial::Bigserial::try_from(9).unwrap()]),
-            name_regex: Some(vec![tufa_common::server::postgres::regex::Regex {
+            name_regex: Some(vec![tufa_common::server::postgres::regex_filter::Regex {
                 regex: std::string::String::from("test"),
                 conjuctive_operator: tufa_common::server::postgres::conjuctive_operator::ConjunctiveOperator::Or,
             }]),//or and support
-            color_regex: Some(vec![tufa_common::server::postgres::regex::Regex {
+            color_regex: Some(vec![tufa_common::server::postgres::regex_filter::Regex {
                 regex: std::string::String::from("test"),
                 conjuctive_operator: tufa_common::server::postgres::conjuctive_operator::ConjunctiveOperator::Or,
             }]),
