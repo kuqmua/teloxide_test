@@ -153,8 +153,8 @@ pub async fn start_bot() {
     println!("--------------try_patch------------------");
     match tufa_common::repositories_types::tufa_server::routes::api::cats::update_by_id::try_update_by_id(
         &std::string::String::from("http://127.0.0.1:8080"),
-        tufa_common::repositories_types::tufa_server::routes::api::cats::CatToUpdateById::Name {
-            name: String::from("testcatnamepatched"),
+        tufa_common::repositories_types::tufa_server::routes::api::cats::UpdateByIdPathParameters {
+            id: tufa_common::server::postgres::bigserial::Bigserial::try_from(65).unwrap(),
         },
         tufa_common::repositories_types::tufa_server::routes::api::cats::CatToUpdateById::NameColor { 
             name: std::string::String::from("name"), 
