@@ -3,17 +3,17 @@ pub async fn start_bot() {
     pretty_env_logger::init();
     log::info!("Starting command bot...");
     println!("---------------try_get_result-----------------");
-    match tufa_common::repositories_types::tufa_server::routes::api::cats::post_search::try_post_search(
+    match tufa_common::repositories_types::tufa_server::routes::api::cats::read_post::try_read_post(
         &std::string::String::from("http://127.0.0.1:8080"),
         //todo - builder pattern?
-        tufa_common::repositories_types::tufa_server::routes::api::cats::CatToPostSearch { 
-            select: tufa_common::repositories_types::tufa_server::routes::api::cats::CatColumnSelectVariants::Id,
+        tufa_common::repositories_types::tufa_server::routes::api::cats::CatToReadPost { 
+            select: tufa_common::repositories_types::tufa_server::routes::api::cats::CatColumnSelectJson::Id,
             ids: Some(vec![tufa_common::server::postgres::bigserial::Bigserial::try_from(9).unwrap()]),
-            name_regex: Some(vec![tufa_common::server::postgres::regex_filter::Regex {
+            name_regex: Some(vec![tufa_common::server::postgres::regex_filter::RegexFilter {
                 regex: std::string::String::from("test"),
                 conjuctive_operator: tufa_common::server::postgres::conjuctive_operator::ConjunctiveOperator::Or,
             }]),//or and support
-            color_regex: Some(vec![tufa_common::server::postgres::regex_filter::Regex {
+            color_regex: Some(vec![tufa_common::server::postgres::regex_filter::RegexFilter {
                 regex: std::string::String::from("test"),
                 conjuctive_operator: tufa_common::server::postgres::conjuctive_operator::ConjunctiveOperator::Or,
             }]),
@@ -54,141 +54,139 @@ pub async fn start_bot() {
             println!("{e}");
         }
     }
-    // println!("---------------try_get_result-----------------");
-    // match tufa_common::repositories_types::tufa_server::routes::api::cats::get::try_get(
-    //     &std::string::String::from("http://127.0.0.1:8080"),
-    //     //todo - builder pattern?
-    //     tufa_common::repositories_types::tufa_server::routes::api::cats::GetQueryParameters {
-    //         select: Some(
-    //             tufa_common::repositories_types::tufa_server::routes::api::cats::CatSelect::Id,
-    //         ),
-    //         id: None,
-    //         // Some(tufa_common::server::postgres::bigserial_ids::BigserialIds(
-    //         //     vec![tufa_common::server::postgres::bigserial::Bigserial::try_from(65).unwrap()],
-    //         // ))
-    //         name: None,
-    //         color: None,
-    //         order_by: Some(tufa_common::repositories_types::tufa_server::routes::api::cats::CatOrderByWrapper(
-    //             tufa_common::repositories_types::tufa_server::routes::api::cats::CatOrderBy {
-    //                 column: tufa_common::repositories_types::tufa_server::routes::api::cats::CatOrderByColumn::Id,
-    //                 order: Some(tufa_common::server::postgres::order::Order::Asc)
-    //             }
-    //         )),
-    //         limit: tufa_common::server::postgres::postgres_number::PostgresNumber(10),
-    //         offset: Some(tufa_common::server::postgres::postgres_number::PostgresNumber(1)),
-    //     },
-    // )
-    // .await
-    // {
-    //     Ok(vec_cat_options) => {
-    //         // let vec_cat_options_len = vec_cat_options.len();
-    //         // println!("{vec_cat_options:#?}");
-    //         let vec_cat_id: Vec<
-    //             tufa_common::repositories_types::tufa_server::routes::api::cats::CatId,
-    //         > = vec_cat_options
-    //             .into_iter()
-    //             .filter_map(|value| match value.id {
-    //                 Some(id) => Some(
-    //                     tufa_common::repositories_types::tufa_server::routes::api::cats::CatId {
-    //                         id,
-    //                     },
-    //                 ),
-    //                 None => None,
-    //             })
-    //             .collect();
-    //         // let vec_cat_id_len = vec_cat_id.len();
-    //         println!("{vec_cat_id:#?}");
-    //         // println!(
-    //         //     "vec_cat_options_len == vec_cat_id_len {}",
-    //         //     vec_cat_options_len == vec_cat_id_len
-    //         // );
-    //     }
-    //     Err(e) => {
-    //         println!("{e}");
-    //     }
-    // }
-    // println!("---------------try_get_by_id-----------------");
-    // match tufa_common::repositories_types::tufa_server::routes::api::cats::get_by_id::try_get_by_id(
-    //     &std::string::String::from("http://127.0.0.1:8080"),
-    //     tufa_common::repositories_types::tufa_server::routes::api::cats::GetByIdPathParameters {
-    //         id: 65,
-    //     },
-    // )
-    // .await
-    // {
-    //     Ok(cat) => println!("{cat:#?}"),
-    //     Err(e) => {
-    //         println!("{e}")
-    //     }
-    // }
-    // println!("---------------try_post-----------------");
-    // match tufa_common::repositories_types::tufa_server::routes::api::cats::post::try_post(
-    //     &std::string::String::from("http://127.0.0.1:8080"),
-    //     tufa_common::repositories_types::tufa_server::routes::api::cats::CatToPost {
-    //         name: String::from("testcatnamepost"),
-    //         color: String::from("testcatcolorpost"),
-    //     },
-    // )
-    // .await
-    // {
-    //     Ok(_) => (),
-    //     Err(e) => {
-    //         println!("{e:#?}")
-    //     }
-    // }
-    // println!("--------------try_put------------------");
-    // match tufa_common::repositories_types::tufa_server::routes::api::cats::put::try_put(
-    //     &std::string::String::from("http://127.0.0.1:8080"),
-    //     tufa_common::repositories_types::tufa_server::routes::api::cats::Cat {
-    //         id: 65,
-    //         name: String::from("testcatnameput"),
-    //         color: String::from("testcatcolorput"),
-    //     },
-    // )
-    // .await
-    // {
-    //     Ok(_) => (),
-    //     Err(e) => println!("{e}"),
-    // }
-    // // //todo handle please use put
-    // println!("--------------try_patch------------------");
-    // match tufa_common::repositories_types::tufa_server::routes::api::cats::patch::try_patch(
-    //     &std::string::String::from("http://127.0.0.1:8080"),
-    //     tufa_common::repositories_types::tufa_server::routes::api::cats::CatToPatchById::IdName {
-    //         id: 65,
-    //         name: String::from("testcatnamepatched"),
-    //     },
-    // )
-    // .await
-    // {
-    //     Ok(_) => (),
-    //     Err(e) => println!("{e}"),
-    // }
-    // println!("--------------try_delete------------------");
-    // match tufa_common::repositories_types::tufa_server::routes::api::cats::delete::try_delete(
-    //     &std::string::String::from("http://127.0.0.1:8080"),
-    //     tufa_common::repositories_types::tufa_server::routes::api::cats::DeleteQueryParameters {
-    //         name: Some(String::from("testcatnamepost")),
-    //         color: None,
-    //     },
-    // )
-    // .await
-    // {
-    //     Ok(_) => (),
-    //     Err(e) => println!("{e}"),
-    // }
-    // println!("--------------try_delete_by_id------------------");
-    // match tufa_common::repositories_types::tufa_server::routes::api::cats::delete_by_id::try_delete_by_id(
-    //     &std::string::String::from("http://127.0.0.1:8080"),
-    //     tufa_common::repositories_types::tufa_server::routes::api::cats::DeleteByIdPathParameters {
-    //         id: 65,
-    //     },
-    // )
-    // .await
-    // {
-    //     Ok(_) => (),
-    //     Err(e) => println!("{e}"),
-    // }
+    println!("---------------try_get_result-----------------");
+    match tufa_common::repositories_types::tufa_server::routes::api::cats::read::try_read(
+        &std::string::String::from("http://127.0.0.1:8080"),
+        //todo - builder pattern?
+        tufa_common::repositories_types::tufa_server::routes::api::cats::ReadQueryParameters {
+            select: Some(
+                tufa_common::repositories_types::tufa_server::routes::api::cats::CatColumnSelectUrl::Id,
+            ),
+            id: None,
+            // Some(tufa_common::server::postgres::bigserial_ids::BigserialIds(
+            //     vec![tufa_common::server::postgres::bigserial::Bigserial::try_from(65).unwrap()],
+            // ))
+            name: None,
+            color: None,
+            order_by: Some(tufa_common::repositories_types::tufa_server::routes::api::cats::CatOrderByWrapper(
+                tufa_common::repositories_types::tufa_server::routes::api::cats::CatOrderBy {
+                    column: tufa_common::repositories_types::tufa_server::routes::api::cats::CatColumn::Id,
+                    order: Some(tufa_common::server::postgres::order::Order::Asc)
+                }
+            )),
+            limit: tufa_common::server::postgres::postgres_number::PostgresNumber(10),
+            offset: Some(tufa_common::server::postgres::postgres_number::PostgresNumber(1)),
+        },
+    )
+    .await
+    {
+        Ok(vec_cat_options) => {
+            // let vec_cat_options_len = vec_cat_options.len();
+            // println!("{vec_cat_options:#?}");
+            let vec_cat_id: Vec<
+                tufa_common::repositories_types::tufa_server::routes::api::cats::CatId,
+            > = vec_cat_options
+                .into_iter()
+                .filter_map(|value| match value.id {
+                    Some(id) => Some(
+                        tufa_common::repositories_types::tufa_server::routes::api::cats::CatId {
+                            id,
+                        },
+                    ),
+                    None => None,
+                })
+                .collect();
+            // let vec_cat_id_len = vec_cat_id.len();
+            println!("{vec_cat_id:#?}");
+            // println!(
+            //     "vec_cat_options_len == vec_cat_id_len {}",
+            //     vec_cat_options_len == vec_cat_id_len
+            // );
+        }
+        Err(e) => {
+            println!("{e}");
+        }
+    }
+    println!("---------------try_get_by_id-----------------");
+    match tufa_common::repositories_types::tufa_server::routes::api::cats::read_by_id::try_read_by_id(
+        &std::string::String::from("http://127.0.0.1:8080"),
+        tufa_common::repositories_types::tufa_server::routes::api::cats::ReadByIdPathParameters {
+            id: tufa_common::server::postgres::bigserial::Bigserial::try_from(65).unwrap(),
+        },
+    )
+    .await
+    {
+        Ok(cat) => println!("{cat:#?}"),
+        Err(e) => {
+            println!("{e}")
+        }
+    }
+    println!("---------------try_post-----------------");
+    match tufa_common::repositories_types::tufa_server::routes::api::cats::create::try_create(
+        &std::string::String::from("http://127.0.0.1:8080"),
+        tufa_common::repositories_types::tufa_server::routes::api::cats::CatToCreate {
+            name: String::from("testcatnamepost"),
+            color: String::from("testcatcolorpost"),
+        },
+    )
+    .await
+    {
+        Ok(_) => (),
+        Err(e) => {
+            println!("{e:#?}")
+        }
+    }
+    println!("--------------try_put------------------");
+    match tufa_common::repositories_types::tufa_server::routes::api::cats::create_or_update_by_id::try_create_or_update_by_id(
+        &std::string::String::from("http://127.0.0.1:8080"),
+        tufa_common::repositories_types::tufa_server::routes::api::cats::CatToCreateOrUpdateById {
+            name: String::from("testcatnameput"),
+            color: String::from("testcatcolorput"),
+        },
+    )
+    .await
+    {
+        Ok(_) => (),
+        Err(e) => println!("{e}"),
+    }
+    // //todo handle please use put
+    println!("--------------try_patch------------------");
+    match tufa_common::repositories_types::tufa_server::routes::api::cats::update_by_id::try_update_by_id(
+        &std::string::String::from("http://127.0.0.1:8080"),
+        tufa_common::repositories_types::tufa_server::routes::api::cats::CatToUpdateById::Name {
+            name: String::from("testcatnamepatched"),
+        },
+    )
+    .await
+    {
+        Ok(_) => (),
+        Err(e) => println!("{e}"),
+    }
+    println!("--------------try_delete------------------");
+    match tufa_common::repositories_types::tufa_server::routes::api::cats::delete::try_delete(
+        &std::string::String::from("http://127.0.0.1:8080"),
+        tufa_common::repositories_types::tufa_server::routes::api::cats::DeleteQueryParameters {
+            name: Some(String::from("testcatnamepost")),
+            color: None,
+        },
+    )
+    .await
+    {
+        Ok(_) => (),
+        Err(e) => println!("{e}"),
+    }
+    println!("--------------try_delete_by_id------------------");
+    match tufa_common::repositories_types::tufa_server::routes::api::cats::delete_by_id::try_delete_by_id(
+        &std::string::String::from("http://127.0.0.1:8080"),
+        tufa_common::repositories_types::tufa_server::routes::api::cats::DeleteByIdPathParameters {
+            id: tufa_common::server::postgres::bigserial::Bigserial::try_from(65).unwrap(),
+        },
+    )
+    .await
+    {
+        Ok(_) => (),
+        Err(e) => println!("{e}"),
+    }
 
     // let bot = teloxide::Bot::from_env();
     // teloxide::commands_repl(bot, answer, {
