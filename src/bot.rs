@@ -156,6 +156,10 @@ pub async fn start_bot() {
         tufa_common::repositories_types::tufa_server::routes::api::cats::CatToUpdateById::Name {
             name: String::from("testcatnamepatched"),
         },
+        tufa_common::repositories_types::tufa_server::routes::api::cats::CatToUpdateById::NameColor { 
+            name: std::string::String::from("name"), 
+            color: std::string::String::from("color"), 
+        }
     )
     .await
     {
