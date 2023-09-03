@@ -62,7 +62,7 @@ pub async fn start_bot() {
         &std::string::String::from("http://127.0.0.1:8080"),
         //todo - builder pattern?
         tufa_common::repositories_types::tufa_server::routes::api::cats::ReadParameters { 
-            query: tufa_common::repositories_types::tufa_server::routes::api::cats::ReadQueryParameters {
+            query: tufa_common::repositories_types::tufa_server::routes::api::cats::ReadQuery {
                 select: Some(
                     tufa_common::repositories_types::tufa_server::routes::api::cats::CatColumnSelectUrl::Id,
                 ),
@@ -116,10 +116,10 @@ pub async fn start_bot() {
     match tufa_common::repositories_types::tufa_server::routes::api::cats::read_by_id::try_read_by_id(
         &std::string::String::from("http://127.0.0.1:8080"),
         tufa_common::repositories_types::tufa_server::routes::api::cats::ReadByIdParameters { 
-            path: tufa_common::repositories_types::tufa_server::routes::api::cats::ReadByIdPathParameters {
+            path: tufa_common::repositories_types::tufa_server::routes::api::cats::ReadByIdPath {
                 id: tufa_common::server::postgres::bigserial::Bigserial::try_from(id).unwrap(),
             }, 
-            query: tufa_common::repositories_types::tufa_server::routes::api::cats::ReadByIdQueryParameters {
+            query: tufa_common::repositories_types::tufa_server::routes::api::cats::ReadByIdQuery {
                 select: Some(tufa_common::repositories_types::tufa_server::routes::api::cats::CatColumnSelectUrl::IdColor)    
             }
         },
@@ -152,7 +152,7 @@ pub async fn start_bot() {
     match tufa_common::repositories_types::tufa_server::routes::api::cats::create_or_update_by_id::try_create_or_update_by_id(
         &std::string::String::from("http://127.0.0.1:8080"),
         tufa_common::repositories_types::tufa_server::routes::api::cats::CreateOrUpdateByIdParameters { 
-            path: tufa_common::repositories_types::tufa_server::routes::api::cats::CreateOrUpdateByIdPathParameters { 
+            path: tufa_common::repositories_types::tufa_server::routes::api::cats::CreateOrUpdateByIdPath { 
                 id: tufa_common::server::postgres::bigserial::Bigserial::try_from(id).unwrap(),
             }, 
             payload:  tufa_common::repositories_types::tufa_server::routes::api::cats::CreateOrUpdateByIdPayload { 
@@ -171,7 +171,7 @@ pub async fn start_bot() {
     match tufa_common::repositories_types::tufa_server::routes::api::cats::update_by_id::try_update_by_id(
         &std::string::String::from("http://127.0.0.1:8080"),
         tufa_common::repositories_types::tufa_server::routes::api::cats::UpdateByIdParameters { 
-            path: tufa_common::repositories_types::tufa_server::routes::api::cats::UpdateByIdPathParameters {
+            path: tufa_common::repositories_types::tufa_server::routes::api::cats::UpdateByIdPath {
                 id: tufa_common::server::postgres::bigserial::Bigserial::try_from(id).unwrap(),
             }, 
             payload: tufa_common::repositories_types::tufa_server::routes::api::cats::UpdateByIdPayload::NameColor { 
@@ -189,7 +189,7 @@ pub async fn start_bot() {
     match tufa_common::repositories_types::tufa_server::routes::api::cats::delete::try_delete(
         &std::string::String::from("http://127.0.0.1:8080"),
         tufa_common::repositories_types::tufa_server::routes::api::cats::DeleteParameters { 
-            query: tufa_common::repositories_types::tufa_server::routes::api::cats::DeleteQueryParameters {
+            query: tufa_common::repositories_types::tufa_server::routes::api::cats::DeleteQuery {
                 name: Some(String::from("testcatnamepost")),
                 color: None,
             } 
@@ -204,7 +204,7 @@ pub async fn start_bot() {
     match tufa_common::repositories_types::tufa_server::routes::api::cats::delete_by_id::try_delete_by_id(
         &std::string::String::from("http://127.0.0.1:8080"),
         tufa_common::repositories_types::tufa_server::routes::api::cats::DeleteByIdParameters { 
-            path: tufa_common::repositories_types::tufa_server::routes::api::cats::DeleteByIdPathParameters {
+            path: tufa_common::repositories_types::tufa_server::routes::api::cats::DeleteByIdPath {
                 id: tufa_common::server::postgres::bigserial::Bigserial::try_from(id).unwrap(),
             }
         },
