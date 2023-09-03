@@ -7,23 +7,25 @@ pub async fn start_bot() {
     match tufa_common::repositories_types::tufa_server::routes::api::cats::read_post::try_read_post(
         &std::string::String::from("http://127.0.0.1:8080"),
         //todo - builder pattern?
-        tufa_common::repositories_types::tufa_server::routes::api::cats::CatToReadPost { 
-            select: tufa_common::repositories_types::tufa_server::routes::api::cats::CatColumnSelectJson::Id,
-            ids: Some(vec![tufa_common::server::postgres::bigserial::Bigserial::try_from(id).unwrap()]),
-            name_regex: Some(vec![tufa_common::server::postgres::regex_filter::RegexFilter {
-                regex: std::string::String::from("test"),
-                conjuctive_operator: tufa_common::server::postgres::conjuctive_operator::ConjunctiveOperator::Or,
-            }]),//or and support
-            color_regex: Some(vec![tufa_common::server::postgres::regex_filter::RegexFilter {
-                regex: std::string::String::from("test"),
-                conjuctive_operator: tufa_common::server::postgres::conjuctive_operator::ConjunctiveOperator::Or,
-            }]),
-            order_by: tufa_common::repositories_types::tufa_server::routes::api::cats::CatOrderBy {
-                column: tufa_common::repositories_types::tufa_server::routes::api::cats::CatColumn::Name,
-                order: Some(tufa_common::server::postgres::order::Order::Desc),
-            },
-            limit: tufa_common::server::postgres::postgres_number::PostgresNumber(10),
-            offset: tufa_common::server::postgres::postgres_number::PostgresNumber(1),
+        tufa_common::repositories_types::tufa_server::routes::api::cats::ReadPostParameters{ 
+            payload: tufa_common::repositories_types::tufa_server::routes::api::cats::ReadPostPayload { 
+                select: tufa_common::repositories_types::tufa_server::routes::api::cats::CatColumnSelectJson::Id,
+                ids: Some(vec![tufa_common::server::postgres::bigserial::Bigserial::try_from(id).unwrap()]),
+                name_regex: Some(vec![tufa_common::server::postgres::regex_filter::RegexFilter {
+                    regex: std::string::String::from("test"),
+                    conjuctive_operator: tufa_common::server::postgres::conjuctive_operator::ConjunctiveOperator::Or,
+                }]),//or and support
+                color_regex: Some(vec![tufa_common::server::postgres::regex_filter::RegexFilter {
+                    regex: std::string::String::from("test"),
+                    conjuctive_operator: tufa_common::server::postgres::conjuctive_operator::ConjunctiveOperator::Or,
+                }]),
+                order_by: tufa_common::repositories_types::tufa_server::routes::api::cats::CatOrderBy {
+                    column: tufa_common::repositories_types::tufa_server::routes::api::cats::CatColumn::Name,
+                    order: Some(tufa_common::server::postgres::order::Order::Desc),
+                },
+                limit: tufa_common::server::postgres::postgres_number::PostgresNumber(10),
+                offset: tufa_common::server::postgres::postgres_number::PostgresNumber(1),
+            } 
         },
     )
     .await
@@ -59,24 +61,26 @@ pub async fn start_bot() {
     match tufa_common::repositories_types::tufa_server::routes::api::cats::read::try_read(
         &std::string::String::from("http://127.0.0.1:8080"),
         //todo - builder pattern?
-        tufa_common::repositories_types::tufa_server::routes::api::cats::ReadQueryParameters {
-            select: Some(
-                tufa_common::repositories_types::tufa_server::routes::api::cats::CatColumnSelectUrl::Id,
-            ),
-            id: None,
-            // Some(tufa_common::server::postgres::bigserial_ids::BigserialIds(
-            //     vec![tufa_common::server::postgres::bigserial::Bigserial::try_from(id).unwrap()],
-            // ))
-            name: None,
-            color: None,
-            order_by: Some(tufa_common::repositories_types::tufa_server::routes::api::cats::CatOrderByWrapper(
-                tufa_common::repositories_types::tufa_server::routes::api::cats::CatOrderBy {
-                    column: tufa_common::repositories_types::tufa_server::routes::api::cats::CatColumn::Id,
-                    order: Some(tufa_common::server::postgres::order::Order::Asc)
-                }
-            )),
-            limit: tufa_common::server::postgres::postgres_number::PostgresNumber(10),
-            offset: Some(tufa_common::server::postgres::postgres_number::PostgresNumber(1)),
+        tufa_common::repositories_types::tufa_server::routes::api::cats::ReadParameters { 
+            query: tufa_common::repositories_types::tufa_server::routes::api::cats::ReadQueryParameters {
+                select: Some(
+                    tufa_common::repositories_types::tufa_server::routes::api::cats::CatColumnSelectUrl::Id,
+                ),
+                id: None,
+                // Some(tufa_common::server::postgres::bigserial_ids::BigserialIds(
+                //     vec![tufa_common::server::postgres::bigserial::Bigserial::try_from(id).unwrap()],
+                // ))
+                name: None,
+                color: None,
+                order_by: Some(tufa_common::repositories_types::tufa_server::routes::api::cats::CatOrderByWrapper(
+                    tufa_common::repositories_types::tufa_server::routes::api::cats::CatOrderBy {
+                        column: tufa_common::repositories_types::tufa_server::routes::api::cats::CatColumn::Id,
+                        order: Some(tufa_common::server::postgres::order::Order::Asc)
+                    }
+                )),
+                limit: tufa_common::server::postgres::postgres_number::PostgresNumber(10),
+                offset: Some(tufa_common::server::postgres::postgres_number::PostgresNumber(1)),
+            }
         },
     )
     .await
@@ -111,12 +115,14 @@ pub async fn start_bot() {
     println!("--------------try_read_by_id-----------------");
     match tufa_common::repositories_types::tufa_server::routes::api::cats::read_by_id::try_read_by_id(
         &std::string::String::from("http://127.0.0.1:8080"),
-        tufa_common::repositories_types::tufa_server::routes::api::cats::ReadByIdPathParameters {
-            id: tufa_common::server::postgres::bigserial::Bigserial::try_from(id).unwrap(),
+        tufa_common::repositories_types::tufa_server::routes::api::cats::ReadByIdParameters { 
+            path: tufa_common::repositories_types::tufa_server::routes::api::cats::ReadByIdPathParameters {
+                id: tufa_common::server::postgres::bigserial::Bigserial::try_from(id).unwrap(),
+            }, 
+            query: tufa_common::repositories_types::tufa_server::routes::api::cats::ReadByIdQueryParameters {
+                select: Some(tufa_common::repositories_types::tufa_server::routes::api::cats::CatColumnSelectUrl::IdColor)    
+            }
         },
-        tufa_common::repositories_types::tufa_server::routes::api::cats::ReadByIdQueryParameters {
-            select: Some(tufa_common::repositories_types::tufa_server::routes::api::cats::CatColumnSelectUrl::IdColor)    
-        }
     )
     .await
     {
@@ -128,9 +134,11 @@ pub async fn start_bot() {
     println!("--------------try_create-----------------");
     match tufa_common::repositories_types::tufa_server::routes::api::cats::create::try_create(
         &std::string::String::from("http://127.0.0.1:8080"),
-        tufa_common::repositories_types::tufa_server::routes::api::cats::CatToCreate {
-            name: String::from("testcatnamepost"),
-            color: String::from("testcatcolorpost"),
+        tufa_common::repositories_types::tufa_server::routes::api::cats::CreateParameters { 
+            payload: tufa_common::repositories_types::tufa_server::routes::api::cats::CreatePayload {
+                name: String::from("testcatnamepost"),
+                color: String::from("testcatcolorpost"),
+            }
         },
     )
     .await
@@ -143,13 +151,15 @@ pub async fn start_bot() {
     println!("--------------try_create_or_update_by_id------------------");
     match tufa_common::repositories_types::tufa_server::routes::api::cats::create_or_update_by_id::try_create_or_update_by_id(
         &std::string::String::from("http://127.0.0.1:8080"),
-        tufa_common::repositories_types::tufa_server::routes::api::cats::CreateOrUpdateByIdPathParameters { 
-            id: tufa_common::server::postgres::bigserial::Bigserial::try_from(id).unwrap(),
-        },
-        tufa_common::repositories_types::tufa_server::routes::api::cats::CatToCreateOrUpdateById { 
-            name: std::string::String::from("testcatnameput"), 
-            color: std::string::String::from("testcatcolorput") 
-        },
+        tufa_common::repositories_types::tufa_server::routes::api::cats::CreateOrUpdateByIdParameters { 
+            path: tufa_common::repositories_types::tufa_server::routes::api::cats::CreateOrUpdateByIdPathParameters { 
+                id: tufa_common::server::postgres::bigserial::Bigserial::try_from(id).unwrap(),
+            }, 
+            payload:  tufa_common::repositories_types::tufa_server::routes::api::cats::CreateOrUpdateByIdPayload { 
+                name: std::string::String::from("testcatnameput"), 
+                color: std::string::String::from("testcatcolorput") 
+            }
+        }
     )
     .await
     {
@@ -160,12 +170,14 @@ pub async fn start_bot() {
     println!("--------------try_update_by_id------------------");
     match tufa_common::repositories_types::tufa_server::routes::api::cats::update_by_id::try_update_by_id(
         &std::string::String::from("http://127.0.0.1:8080"),
-        tufa_common::repositories_types::tufa_server::routes::api::cats::UpdateByIdPathParameters {
-            id: tufa_common::server::postgres::bigserial::Bigserial::try_from(id).unwrap(),
-        },
-        tufa_common::repositories_types::tufa_server::routes::api::cats::CatToUpdateById::NameColor { 
-            name: std::string::String::from("name"), 
-            color: std::string::String::from("color"), 
+        tufa_common::repositories_types::tufa_server::routes::api::cats::UpdateByIdParameters { 
+            path: tufa_common::repositories_types::tufa_server::routes::api::cats::UpdateByIdPathParameters {
+                id: tufa_common::server::postgres::bigserial::Bigserial::try_from(id).unwrap(),
+            }, 
+            payload: tufa_common::repositories_types::tufa_server::routes::api::cats::UpdateByIdPayload::NameColor { 
+                name: std::string::String::from("name"), 
+                color: std::string::String::from("color"), 
+            }
         }
     )
     .await
@@ -176,9 +188,11 @@ pub async fn start_bot() {
     println!("--------------try_delete------------------");
     match tufa_common::repositories_types::tufa_server::routes::api::cats::delete::try_delete(
         &std::string::String::from("http://127.0.0.1:8080"),
-        tufa_common::repositories_types::tufa_server::routes::api::cats::DeleteQueryParameters {
-            name: Some(String::from("testcatnamepost")),
-            color: None,
+        tufa_common::repositories_types::tufa_server::routes::api::cats::DeleteParameters { 
+            query: tufa_common::repositories_types::tufa_server::routes::api::cats::DeleteQueryParameters {
+                name: Some(String::from("testcatnamepost")),
+                color: None,
+            } 
         },
     )
     .await
@@ -189,8 +203,10 @@ pub async fn start_bot() {
     println!("--------------try_delete_by_id------------------");
     match tufa_common::repositories_types::tufa_server::routes::api::cats::delete_by_id::try_delete_by_id(
         &std::string::String::from("http://127.0.0.1:8080"),
-        tufa_common::repositories_types::tufa_server::routes::api::cats::DeleteByIdPathParameters {
-            id: tufa_common::server::postgres::bigserial::Bigserial::try_from(id).unwrap(),
+        tufa_common::repositories_types::tufa_server::routes::api::cats::DeleteByIdParameters { 
+            path: tufa_common::repositories_types::tufa_server::routes::api::cats::DeleteByIdPathParameters {
+                id: tufa_common::server::postgres::bigserial::Bigserial::try_from(id).unwrap(),
+            }
         },
     )
     .await
