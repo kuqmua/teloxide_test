@@ -9,7 +9,7 @@ pub async fn start_bot() {
         //todo - builder pattern?
         tufa_common::repositories_types::tufa_server::routes::api::cats::ReadPostParameters{ 
             payload: tufa_common::repositories_types::tufa_server::routes::api::cats::ReadPostPayload { 
-                select: tufa_common::repositories_types::tufa_server::routes::api::cats::CatColumnSelectJson::Id,
+                select: tufa_common::repositories_types::tufa_server::routes::api::cats::CatColumnSelect::Id,
                 ids: Some(vec![tufa_common::server::postgres::bigserial::Bigserial::try_from(id).unwrap()]),
                 name_regex: Some(vec![tufa_common::server::postgres::regex_filter::RegexFilter {
                     regex: std::string::String::from("test"),
@@ -64,7 +64,7 @@ pub async fn start_bot() {
         tufa_common::repositories_types::tufa_server::routes::api::cats::ReadParameters { 
             query: tufa_common::repositories_types::tufa_server::routes::api::cats::ReadQuery {
                 select: Some(
-                    tufa_common::repositories_types::tufa_server::routes::api::cats::CatColumnSelectUrl::Id,
+                    tufa_common::repositories_types::tufa_server::routes::api::cats::CatColumnSelect::Id,
                 ),
                 id: None,
                 // Some(tufa_common::server::postgres::bigserial_ids::BigserialIds(
@@ -120,7 +120,7 @@ pub async fn start_bot() {
                 id: tufa_common::server::postgres::bigserial::Bigserial::try_from(id).unwrap(),
             }, 
             query: tufa_common::repositories_types::tufa_server::routes::api::cats::ReadByIdQuery {
-                select: Some(tufa_common::repositories_types::tufa_server::routes::api::cats::CatColumnSelectUrl::IdColor)    
+                select: Some(tufa_common::repositories_types::tufa_server::routes::api::cats::CatColumnSelect::IdColor)    
             }
         },
     )
