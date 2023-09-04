@@ -19,10 +19,10 @@ pub async fn start_bot() {
                     regex: std::string::String::from("test"),
                     conjuctive_operator: tufa_common::server::postgres::conjuctive_operator::ConjunctiveOperator::Or,
                 }]),
-                order_by: tufa_common::repositories_types::tufa_server::routes::api::cats::CatOrderBy {
-                    column: tufa_common::repositories_types::tufa_server::routes::api::cats::CatColumn::Name,
-                    order: Some(tufa_common::server::postgres::order::Order::Desc),
-                },
+                // order_by: tufa_common::repositories_types::tufa_server::routes::api::cats::CatOrderBy {
+                //     column: tufa_common::repositories_types::tufa_server::routes::api::cats::CatColumn::Name,
+                //     order: Some(tufa_common::server::postgres::order::Order::Desc),
+                // },
                 limit: tufa_common::server::postgres::postgres_number::PostgresNumber(10),
                 offset: tufa_common::server::postgres::postgres_number::PostgresNumber(1),
             } 
@@ -66,18 +66,18 @@ pub async fn start_bot() {
                 select: Some(
                     tufa_common::repositories_types::tufa_server::routes::api::cats::CatColumnSelect::Id,
                 ),
-                id: None,
-                // Some(tufa_common::server::postgres::bigserial_ids::BigserialIds(
-                //     vec![tufa_common::server::postgres::bigserial::Bigserial::try_from(id).unwrap()],
-                // ))
-                name: None,
-                color: None,
-                order_by: Some(tufa_common::repositories_types::tufa_server::routes::api::cats::CatOrderByWrapper(
-                    tufa_common::repositories_types::tufa_server::routes::api::cats::CatOrderBy {
-                        column: tufa_common::repositories_types::tufa_server::routes::api::cats::CatColumn::Id,
-                        order: Some(tufa_common::server::postgres::order::Order::Asc)
-                    }
+                id: 
+                Some(tufa_common::server::postgres::bigserial_ids::BigserialIds(
+                    vec![tufa_common::server::postgres::bigserial::Bigserial::try_from(id).unwrap()],
                 )),
+                name: Some(tufa_common::server::routes::helpers::strings_deserialized_from_string_splitted_by_comma::StringsDeserializedFromStringSplittedByComma(vec![std::string::String::from("onename"), std::string::String::from("twoname")])),
+                color: None,
+                // order_by: Some(tufa_common::repositories_types::tufa_server::routes::api::cats::CatOrderByWrapper(
+                //     tufa_common::repositories_types::tufa_server::routes::api::cats::CatOrderBy {
+                //         column: tufa_common::repositories_types::tufa_server::routes::api::cats::CatColumn::Id,
+                //         order: Some(tufa_common::server::postgres::order::Order::Asc)
+                //     }
+                // )),
                 limit: tufa_common::server::postgres::postgres_number::PostgresNumber(10),
                 offset: Some(tufa_common::server::postgres::postgres_number::PostgresNumber(1)),
             }
