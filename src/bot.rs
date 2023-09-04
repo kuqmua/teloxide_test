@@ -19,7 +19,7 @@ pub async fn start_bot() {
                     regex: std::string::String::from("test"),
                     conjuctive_operator: tufa_common::server::postgres::conjuctive_operator::ConjunctiveOperator::Or,
                 }]),
-                order_by: tufa_common::repositories_types::tufa_server::routes::api::cats::CatOrderBy {
+                order_by: tufa_common::server::postgres::order_by::OrderBy {
                     column: tufa_common::repositories_types::tufa_server::routes::api::cats::CatColumn::Name,
                     order: Some(tufa_common::server::postgres::order::Order::Desc),
                 },
@@ -73,7 +73,7 @@ pub async fn start_bot() {
                 name: Some(tufa_common::server::routes::helpers::strings_deserialized_from_string_splitted_by_comma::StringsDeserializedFromStringSplittedByComma(vec![std::string::String::from("onename"), std::string::String::from("twoname")])),
                 color: None,
                 order_by: Some(tufa_common::repositories_types::tufa_server::routes::api::cats::CatOrderByWrapper(
-                    tufa_common::repositories_types::tufa_server::routes::api::cats::CatOrderBy {
+                    tufa_common::server::postgres::order_by::OrderBy {
                         column: tufa_common::repositories_types::tufa_server::routes::api::cats::CatColumn::Id,
                         order: Some(tufa_common::server::postgres::order::Order::Asc)
                     }
