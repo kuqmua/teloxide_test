@@ -174,9 +174,9 @@ pub async fn start_bot() {
             path: tufa_common::repositories_types::tufa_server::routes::api::cats::UpdateByIdPath {
                 id: tufa_common::server::postgres::bigserial::Bigserial::try_from(id).unwrap(),
             }, 
-            payload: tufa_common::repositories_types::tufa_server::routes::api::cats::UpdateByIdPayload::NameColor { 
-                name: std::string::String::from("name"), 
-                color: std::string::String::from("color"), 
+            payload: tufa_common::repositories_types::tufa_server::routes::api::cats::UpdateByIdPayload { 
+                name: Some(std::string::String::from("name")), 
+                color: Some(std::string::String::from("color")), 
             }
         }
     )
