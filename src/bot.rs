@@ -10,12 +10,12 @@ pub async fn start_bot() {
         tufa_common::repositories_types::tufa_server::routes::api::cats::ReadWithBodyParameters{ 
             payload: tufa_common::repositories_types::tufa_server::routes::api::cats::ReadWithBodyPayload { 
                 select: tufa_common::repositories_types::tufa_server::routes::api::cats::CatColumnSelect::Id,
-                ids: Some(vec![tufa_common::server::postgres::bigserial::Bigserial::try_from(id).unwrap()]),
-                name_regex: Some(vec![tufa_common::server::postgres::regex_filter::RegexFilter {
+                id: Some(vec![tufa_common::server::postgres::bigserial::Bigserial::try_from(id).unwrap()]),
+                name: Some(vec![tufa_common::server::postgres::regex_filter::RegexFilter {
                     regex: std::string::String::from("test"),
                     conjuctive_operator: tufa_common::server::postgres::conjuctive_operator::ConjunctiveOperator::Or,
                 }]),//or and support
-                color_regex: Some(vec![tufa_common::server::postgres::regex_filter::RegexFilter {
+                color: Some(vec![tufa_common::server::postgres::regex_filter::RegexFilter {
                     regex: std::string::String::from("test"),
                     conjuctive_operator: tufa_common::server::postgres::conjuctive_operator::ConjunctiveOperator::Or,
                 }]),
