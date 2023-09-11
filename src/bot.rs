@@ -2,13 +2,13 @@
 pub async fn start_bot() {
     pretty_env_logger::init();
     log::info!("Starting command bot...");
-    let id  = 9;
+    let id  = 14;
     println!("--------------try_read_post-----------------");
-    match tufa_common::repositories_types::tufa_server::routes::api::cats::read_with_body::try_read_post(
+    match tufa_common::repositories_types::tufa_server::routes::api::cats::read_with_body::try_read_with_body(
         &std::string::String::from("http://127.0.0.1:8080"),
         //todo - builder pattern?
-        tufa_common::repositories_types::tufa_server::routes::api::cats::ReadPostParameters{ 
-            payload: tufa_common::repositories_types::tufa_server::routes::api::cats::ReadPostPayload { 
+        tufa_common::repositories_types::tufa_server::routes::api::cats::ReadWithBodyParameters{ 
+            payload: tufa_common::repositories_types::tufa_server::routes::api::cats::ReadWithBodyPayload { 
                 select: tufa_common::repositories_types::tufa_server::routes::api::cats::CatColumnSelect::Id,
                 ids: Some(vec![tufa_common::server::postgres::bigserial::Bigserial::try_from(id).unwrap()]),
                 name_regex: Some(vec![tufa_common::server::postgres::regex_filter::RegexFilter {
