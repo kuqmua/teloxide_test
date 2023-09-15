@@ -148,24 +148,6 @@ pub async fn start_bot() {
             println!("{e:#?}")
         }
     }
-    println!("--------------try_create_or_update_by_id------------------");
-    match tufa_common::repositories_types::tufa_server::routes::api::cats::create_or_update_by_id::try_create_or_update_by_id(
-        &std::string::String::from("http://127.0.0.1:8080"),
-        tufa_common::repositories_types::tufa_server::routes::api::cats::CreateOrUpdateByIdParameters { 
-            path: tufa_common::repositories_types::tufa_server::routes::api::cats::CreateOrUpdateByIdPath { 
-                id: tufa_common::server::postgres::bigserial::Bigserial::try_from(id).unwrap(),
-            }, 
-            payload:  tufa_common::repositories_types::tufa_server::routes::api::cats::CreateOrUpdateByIdPayload { 
-                name: std::string::String::from("testcatnameput"), 
-                color: std::string::String::from("testcatcolorput") 
-            }
-        }
-    )
-    .await
-    {
-        Ok(_) => (),
-        Err(e) => println!("{e}"),
-    }
     // //todo handle please use put
     println!("--------------try_update_by_id------------------");
     match tufa_common::repositories_types::tufa_server::routes::api::cats::update_by_id::try_update_by_id(
