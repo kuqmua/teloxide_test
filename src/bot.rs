@@ -23,8 +23,8 @@ pub async fn start_bot() {
                     column: tufa_common::repositories_types::tufa_server::routes::api::cats::CatColumn::Name,
                     order: Some(tufa_common::server::postgres::order::Order::Desc),
                 },
-                limit: tufa_common::server::postgres::postgres_number::PostgresNumber(10),
-                offset: tufa_common::server::postgres::postgres_number::PostgresNumber(1),
+                limit: tufa_common::server::postgres::postgres_bigint::PostgresNumber(10),
+                offset: tufa_common::server::postgres::postgres_bigint::PostgresNumber(1),
             } 
         },
     )
@@ -78,8 +78,8 @@ pub async fn start_bot() {
                         order: Some(tufa_common::server::postgres::order::Order::Asc)
                     }
                 )),
-                limit: tufa_common::server::postgres::postgres_number::PostgresNumber(10),
-                offset: Some(tufa_common::server::postgres::postgres_number::PostgresNumber(1)),
+                limit: tufa_common::server::postgres::postgres_bigint::PostgresNumber(10),
+                offset: Some(tufa_common::server::postgres::postgres_bigint::PostgresNumber(1)),
             }
         },
     )
