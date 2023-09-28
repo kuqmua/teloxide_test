@@ -132,7 +132,7 @@ pub async fn start_bot() {
         }
     }
     println!("--------------try_create-----------------");
-    match tufa_common::repositories_types::tufa_server::routes::api::cats::create::try_create(
+    match tufa_common::repositories_types::tufa_server::routes::api::cats::try_create(
         &std::string::String::from("http://127.0.0.1:8080"),
         tufa_common::repositories_types::tufa_server::routes::api::cats::CreateParameters { 
             payload: tufa_common::repositories_types::tufa_server::routes::api::cats::CreatePayload {
@@ -183,7 +183,7 @@ pub async fn start_bot() {
         Err(e) => println!("{e}"),
     }
     println!("--------------try_delete_by_id------------------");
-    match tufa_common::repositories_types::tufa_server::routes::api::cats::delete_by_id::try_delete_by_id(
+    match tufa_common::repositories_types::tufa_server::routes::api::cats::try_delete_by_id(
         &std::string::String::from("http://127.0.0.1:8080"),
         tufa_common::repositories_types::tufa_server::routes::api::cats::DeleteByIdParameters { 
             path: tufa_common::repositories_types::tufa_server::routes::api::cats::DeleteByIdPath {
