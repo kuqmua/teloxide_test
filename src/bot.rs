@@ -4,7 +4,7 @@ pub async fn start_bot() {
     log::info!("Starting command bot...");
     let id  = 14;
     println!("--------------try_read_post-----------------");
-    match tufa_common::repositories_types::tufa_server::routes::api::cats::read_with_body::try_read_with_body(
+    match tufa_common::repositories_types::tufa_server::routes::api::cats::try_read_with_body(
         &std::string::String::from("http://127.0.0.1:8080"),
         //todo - builder pattern?
         tufa_common::repositories_types::tufa_server::routes::api::cats::ReadWithBodyParameters{ 
@@ -58,7 +58,7 @@ pub async fn start_bot() {
         }
     }
     println!("--------------try_read-----------------");
-    match tufa_common::repositories_types::tufa_server::routes::api::cats::read::try_read(
+    match tufa_common::repositories_types::tufa_server::routes::api::cats::try_read(
         &std::string::String::from("http://127.0.0.1:8080"),
         //todo - builder pattern?
         tufa_common::repositories_types::tufa_server::routes::api::cats::ReadParameters { 
@@ -113,7 +113,7 @@ pub async fn start_bot() {
         }
     }
     println!("--------------try_read_by_id-----------------");
-    match tufa_common::repositories_types::tufa_server::routes::api::cats::read_by_id::try_read_by_id(
+    match tufa_common::repositories_types::tufa_server::routes::api::cats::try_read_by_id(
         &std::string::String::from("http://127.0.0.1:8080"),
         tufa_common::repositories_types::tufa_server::routes::api::cats::ReadByIdParameters { 
             path: tufa_common::repositories_types::tufa_server::routes::api::cats::ReadByIdPath {
@@ -150,7 +150,7 @@ pub async fn start_bot() {
     }
     // //todo handle please use put
     println!("--------------try_update_by_id------------------");
-    match tufa_common::repositories_types::tufa_server::routes::api::cats::update_by_id::try_update_by_id(
+    match tufa_common::repositories_types::tufa_server::routes::api::cats::try_update_by_id(
         &std::string::String::from("http://127.0.0.1:8080"),
         tufa_common::repositories_types::tufa_server::routes::api::cats::UpdateByIdParameters { 
             path: tufa_common::repositories_types::tufa_server::routes::api::cats::UpdateByIdPath {
@@ -168,7 +168,7 @@ pub async fn start_bot() {
         Err(e) => println!("{e}"),
     }
     println!("--------------try_delete------------------");
-    match tufa_common::repositories_types::tufa_server::routes::api::cats::delete::try_delete(
+    match tufa_common::repositories_types::tufa_server::routes::api::cats::try_delete(
         &std::string::String::from("http://127.0.0.1:8080"),
         tufa_common::repositories_types::tufa_server::routes::api::cats::DeleteParameters { 
             query: tufa_common::repositories_types::tufa_server::routes::api::cats::DeleteQuery {
