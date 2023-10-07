@@ -145,7 +145,7 @@ pub async fn start_bot() {
     {
         Ok(_) => (),
         Err(e) => {
-            println!("{e:#?}")
+            println!("{e}")
         }
     }
     // //todo handle please use put
@@ -172,6 +172,7 @@ pub async fn start_bot() {
         &std::string::String::from("http://127.0.0.1:8080"),
         tufa_common::repositories_types::tufa_server::routes::api::cats::DeleteParameters { 
             query: tufa_common::repositories_types::tufa_server::routes::api::cats::DeleteQuery {
+                id: Some(vec![tufa_common::server::postgres::bigserial::Bigserial::try_from(id).unwrap()]),
                 name: Some(String::from("testcatnamepost")),
                 color: None,
             } 
