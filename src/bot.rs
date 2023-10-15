@@ -3,9 +3,10 @@ pub async fn start_bot() {
     pretty_env_logger::init();
     log::info!("Starting command bot...");
     let id  = 14;
+    let api_location = std::string::String::from("http://127.0.0.1:8080/api");
     println!("--------------try_read_post-----------------");
     match tufa_common::repositories_types::tufa_server::routes::api::cats::try_read_with_body(
-        &std::string::String::from("http://127.0.0.1:8080"),
+        &api_location,
         //todo - builder pattern?
         tufa_common::repositories_types::tufa_server::routes::api::cats::ReadWithBodyParameters{ 
             payload: tufa_common::repositories_types::tufa_server::routes::api::cats::ReadWithBodyPayload { 
@@ -59,7 +60,7 @@ pub async fn start_bot() {
     }
     println!("--------------try_read-----------------");
     match tufa_common::repositories_types::tufa_server::routes::api::cats::try_read(
-        &std::string::String::from("http://127.0.0.1:8080"),
+        &api_location,
         //todo - builder pattern?
         tufa_common::repositories_types::tufa_server::routes::api::cats::ReadParameters { 
             query: tufa_common::repositories_types::tufa_server::routes::api::cats::ReadQuery {
@@ -114,7 +115,7 @@ pub async fn start_bot() {
     }
     println!("--------------try_read_by_id-----------------");
     match tufa_common::repositories_types::tufa_server::routes::api::cats::try_read_by_id(
-        &std::string::String::from("http://127.0.0.1:8080"),
+        &api_location,
         tufa_common::repositories_types::tufa_server::routes::api::cats::ReadByIdParameters { 
             path: tufa_common::repositories_types::tufa_server::routes::api::cats::ReadByIdPath {
                 id: tufa_common::server::postgres::bigserial::Bigserial::try_from(id).unwrap(),
@@ -133,7 +134,7 @@ pub async fn start_bot() {
     }
     println!("--------------try_create-----------------");
     match tufa_common::repositories_types::tufa_server::routes::api::cats::try_create(
-        &std::string::String::from("http://127.0.0.1:8080"),
+        &api_location,
         tufa_common::repositories_types::tufa_server::routes::api::cats::CreateParameters { 
             payload: tufa_common::repositories_types::tufa_server::routes::api::cats::CreatePayload {
                 name: String::from("testcatnamepost"),
@@ -151,7 +152,7 @@ pub async fn start_bot() {
     // //todo handle please use put
     println!("--------------try_update_by_id------------------");
     match tufa_common::repositories_types::tufa_server::routes::api::cats::try_update_by_id(
-        &std::string::String::from("http://127.0.0.1:8080"),
+        &api_location,
         tufa_common::repositories_types::tufa_server::routes::api::cats::UpdateByIdParameters { 
             path: tufa_common::repositories_types::tufa_server::routes::api::cats::UpdateByIdPath {
                 id: tufa_common::server::postgres::bigserial::Bigserial::try_from(id).unwrap(),
@@ -169,7 +170,7 @@ pub async fn start_bot() {
     }
     println!("--------------try_delete------------------");
     match tufa_common::repositories_types::tufa_server::routes::api::cats::try_delete(
-        &std::string::String::from("http://127.0.0.1:8080"),
+        &api_location,
         tufa_common::repositories_types::tufa_server::routes::api::cats::DeleteParameters { 
             query: tufa_common::repositories_types::tufa_server::routes::api::cats::DeleteQuery {
                 id: Some(vec![tufa_common::server::postgres::bigserial::Bigserial::try_from(id).unwrap()]),
@@ -185,7 +186,7 @@ pub async fn start_bot() {
     }
     println!("--------------try_delete_by_id------------------");
     match tufa_common::repositories_types::tufa_server::routes::api::cats::try_delete_by_id(
-        &std::string::String::from("http://127.0.0.1:8080"),
+        &api_location,
         tufa_common::repositories_types::tufa_server::routes::api::cats::DeleteByIdParameters { 
             path: tufa_common::repositories_types::tufa_server::routes::api::cats::DeleteByIdPath {
                 id: tufa_common::server::postgres::bigserial::Bigserial::try_from(id).unwrap(),
