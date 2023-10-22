@@ -113,14 +113,14 @@ pub async fn start_bot() {
             println!("{e}");
         }
     }
-    println!("--------------try_read_by_id-----------------");
-    match tufa_common::repositories_types::tufa_server::routes::api::cats::try_read_by_id(
+    println!("--------------try_read_one-----------------");
+    match tufa_common::repositories_types::tufa_server::routes::api::cats::try_read_one(
         &api_location,
-        tufa_common::repositories_types::tufa_server::routes::api::cats::ReadByIdParameters { 
-            path: tufa_common::repositories_types::tufa_server::routes::api::cats::ReadByIdPath {
+        tufa_common::repositories_types::tufa_server::routes::api::cats::ReadOneParameters { 
+            path: tufa_common::repositories_types::tufa_server::routes::api::cats::ReadOnePath {
                 id: tufa_common::server::postgres::bigserial::Bigserial::try_from(id).unwrap(),
             }, 
-            query: tufa_common::repositories_types::tufa_server::routes::api::cats::ReadByIdQuery {
+            query: tufa_common::repositories_types::tufa_server::routes::api::cats::ReadOneQuery {
                 select: Some(tufa_common::repositories_types::tufa_server::routes::api::cats::CatColumnSelect::IdColor)    
             }
         },
