@@ -132,11 +132,11 @@ pub async fn start_bot() {
             println!("{e}")
         }
     }
-    println!("--------------try_create-----------------");
-    match tufa_common::repositories_types::tufa_server::routes::api::cats::try_create(
+    println!("--------------try_create_one-----------------");//todo add try_create_many
+    match tufa_common::repositories_types::tufa_server::routes::api::cats::try_create_one(
         &api_location,
-        tufa_common::repositories_types::tufa_server::routes::api::cats::CreateParameters { 
-            payload: tufa_common::repositories_types::tufa_server::routes::api::cats::CreatePayload {
+        tufa_common::repositories_types::tufa_server::routes::api::cats::CreateOneParameters { 
+            payload: tufa_common::repositories_types::tufa_server::routes::api::cats::CreateOnePayload {
                 name: String::from("testcatnamepost"),
                 color: String::from("testcatcolorpost"),
             }
