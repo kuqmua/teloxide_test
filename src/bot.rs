@@ -186,8 +186,8 @@ pub async fn start_bot() {
         Ok(_) => (),
         Err(e) => println!("{e}"),
     }
-    println!("--------------try_delete_by_id------------------");
-    match tufa_common::repositories_types::tufa_server::routes::api::cats::try_delete_by_id(
+    println!("--------------try_delete_one------------------");
+    match tufa_common::repositories_types::tufa_server::routes::api::cats::try_delete_one(
         &api_location,
         tufa_common::repositories_types::tufa_server::routes::api::cats::DeleteOneParameters { 
             path: tufa_common::repositories_types::tufa_server::routes::api::cats::DeleteOnePath {
