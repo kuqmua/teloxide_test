@@ -189,8 +189,8 @@ pub async fn start_bot() {
     println!("--------------try_delete_by_id------------------");
     match tufa_common::repositories_types::tufa_server::routes::api::cats::try_delete_by_id(
         &api_location,
-        tufa_common::repositories_types::tufa_server::routes::api::cats::DeleteByIdParameters { 
-            path: tufa_common::repositories_types::tufa_server::routes::api::cats::DeleteByIdPath {
+        tufa_common::repositories_types::tufa_server::routes::api::cats::DeleteOneParameters { 
+            path: tufa_common::repositories_types::tufa_server::routes::api::cats::DeleteOnePath {
                 id: tufa_common::server::postgres::bigserial::Bigserial::try_from(id).unwrap(),
             }
         },
