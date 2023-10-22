@@ -150,14 +150,14 @@ pub async fn start_bot() {
         }
     }
     // //todo handle please use put
-    println!("--------------try_update_by_id------------------");
-    match tufa_common::repositories_types::tufa_server::routes::api::cats::try_update_by_id(
+    println!("--------------try_update_one------------------");
+    match tufa_common::repositories_types::tufa_server::routes::api::cats::try_update_one(
         &api_location,
-        tufa_common::repositories_types::tufa_server::routes::api::cats::UpdateByIdParameters { 
-            path: tufa_common::repositories_types::tufa_server::routes::api::cats::UpdateByIdPath {
+        tufa_common::repositories_types::tufa_server::routes::api::cats::UpdateOneParameters { 
+            path: tufa_common::repositories_types::tufa_server::routes::api::cats::UpdateOnePath {
                 id: tufa_common::server::postgres::bigserial::Bigserial::try_from(id).unwrap(),
             }, 
-            payload: tufa_common::repositories_types::tufa_server::routes::api::cats::UpdateByIdPayload { 
+            payload: tufa_common::repositories_types::tufa_server::routes::api::cats::UpdateOnePayload { 
                 name: Some(std::string::String::from("name")), 
                 color: Some(std::string::String::from("color")), 
             }
