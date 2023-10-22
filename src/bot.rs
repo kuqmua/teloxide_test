@@ -58,12 +58,12 @@ pub async fn start_bot() {
             println!("{e}");
         }
     }
-    println!("--------------try_read-----------------");
-    match tufa_common::repositories_types::tufa_server::routes::api::cats::try_read(
+    println!("--------------try_read_many-----------------");
+    match tufa_common::repositories_types::tufa_server::routes::api::cats::try_read_many(
         &api_location,
         //todo - builder pattern?
-        tufa_common::repositories_types::tufa_server::routes::api::cats::ReadParameters { 
-            query: tufa_common::repositories_types::tufa_server::routes::api::cats::ReadQuery {
+        tufa_common::repositories_types::tufa_server::routes::api::cats::ReadManyParameters { 
+            query: tufa_common::repositories_types::tufa_server::routes::api::cats::ReadManyQuery {
                 select: Some(
                     tufa_common::repositories_types::tufa_server::routes::api::cats::CatColumnSelect::Id,
                 ),
