@@ -150,7 +150,7 @@ pub async fn start_bot() {
         }
     }
     // //todo handle please use put
-    println!("--------------try_update_one------------------");
+    println!("--------------try_update_one------------------");//todo try_update_many
     match tufa_common::repositories_types::tufa_server::routes::api::cats::try_update_one(
         &api_location,
         tufa_common::repositories_types::tufa_server::routes::api::cats::UpdateOneParameters { 
