@@ -168,11 +168,11 @@ pub async fn start_bot() {
         Ok(_) => (),
         Err(e) => println!("{e}"),
     }
-    println!("--------------try_delete------------------");
-    match tufa_common::repositories_types::tufa_server::routes::api::cats::try_delete(
+    println!("--------------try_delete_many------------------");
+    match tufa_common::repositories_types::tufa_server::routes::api::cats::try_delete_many(
         &api_location,
-        tufa_common::repositories_types::tufa_server::routes::api::cats::DeleteParameters { 
-            query: tufa_common::repositories_types::tufa_server::routes::api::cats::DeleteQuery {
+        tufa_common::repositories_types::tufa_server::routes::api::cats::DeleteManyParameters { 
+            query: tufa_common::repositories_types::tufa_server::routes::api::cats::DeleteManyQuery {
                 id: Some(tufa_common::server::postgres::bigserial_ids::BigserialIds(
                     vec![tufa_common::server::postgres::bigserial::Bigserial::try_from(id).unwrap()],
                 )),
