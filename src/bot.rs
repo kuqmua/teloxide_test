@@ -4,12 +4,12 @@ pub async fn start_bot() {
     log::info!("Starting command bot...");
     let id  = 14;
     let api_location = std::string::String::from("http://127.0.0.1:8080/api");
-    println!("--------------try_read_post-----------------");
-    match tufa_common::repositories_types::tufa_server::routes::api::cats::try_read_with_body(
+    println!("--------------try_read_many_with_body-----------------");
+    match tufa_common::repositories_types::tufa_server::routes::api::cats::try_read_many_with_body(
         &api_location,
         //todo - builder pattern?
-        tufa_common::repositories_types::tufa_server::routes::api::cats::ReadWithBodyParameters{ 
-            payload: tufa_common::repositories_types::tufa_server::routes::api::cats::ReadWithBodyPayload { 
+        tufa_common::repositories_types::tufa_server::routes::api::cats::ReadManyWithBodyParameters{ 
+            payload: tufa_common::repositories_types::tufa_server::routes::api::cats::ReadManyWithBodyPayload { 
                 select: tufa_common::repositories_types::tufa_server::routes::api::cats::CatColumnSelect::Id,
                 id: Some(vec![tufa_common::server::postgres::bigserial::Bigserial::try_from(id).unwrap()]),
                 name: Some(vec![tufa_common::server::postgres::regex_filter::RegexFilter {
