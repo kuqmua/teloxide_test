@@ -173,8 +173,10 @@ pub async fn start_bot() {
         &api_location,
         tufa_common::repositories_types::tufa_server::routes::api::cats::DeleteParameters { 
             query: tufa_common::repositories_types::tufa_server::routes::api::cats::DeleteQuery {
-                id: Some(vec![tufa_common::server::postgres::bigserial::Bigserial::try_from(id).unwrap()]),
-                name: Some(String::from("testcatnamepost")),
+                id: Some(tufa_common::server::postgres::bigserial_ids::BigserialIds(
+                    vec![tufa_common::server::postgres::bigserial::Bigserial::try_from(id).unwrap()],
+                )),
+                name: Some(tufa_common::server::routes::helpers::strings_deserialized_from_string_splitted_by_comma::StringsDeserializedFromStringSplittedByComma(vec![std::string::String::from("onename"), std::string::String::from("twoname")])),
                 color: None,
             } 
         },
