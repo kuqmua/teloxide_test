@@ -16,10 +16,7 @@ pub async fn start_bot() {
     )
     .await
     {
-        Ok(value) => {
-            println!("{value}");
-            value
-        },
+        Ok(value) => value,
         Err(e) => {
             panic!("{e}");
         }
@@ -30,7 +27,7 @@ pub async fn start_bot() {
         tufa_common::repositories_types::tufa_server::routes::api::cats::ReadOneParameters { 
             path: tufa_common::repositories_types::tufa_server::routes::api::cats::ReadOnePath { id: id.clone() }, 
             query: tufa_common::repositories_types::tufa_server::routes::api::cats::ReadOneQuery {
-                select: Some(tufa_common::repositories_types::tufa_server::routes::api::cats::DogColumnSelect::IdColor)    
+                select: Some(tufa_common::repositories_types::tufa_server::routes::api::cats::DogColumnSelect::IdNameColor)    
             }
         },
     )
@@ -63,7 +60,7 @@ pub async fn start_bot() {
         tufa_common::repositories_types::tufa_server::routes::api::cats::ReadOneParameters { 
             path: tufa_common::repositories_types::tufa_server::routes::api::cats::ReadOnePath { id: id.clone() }, 
             query: tufa_common::repositories_types::tufa_server::routes::api::cats::ReadOneQuery {
-                select: Some(tufa_common::repositories_types::tufa_server::routes::api::cats::DogColumnSelect::IdColor)    
+                select: Some(tufa_common::repositories_types::tufa_server::routes::api::cats::DogColumnSelect::IdNameColor)    
             }
         },
     )
@@ -92,7 +89,7 @@ pub async fn start_bot() {
         tufa_common::repositories_types::tufa_server::routes::api::cats::ReadOneParameters { 
             path: tufa_common::repositories_types::tufa_server::routes::api::cats::ReadOnePath { id }, 
             query: tufa_common::repositories_types::tufa_server::routes::api::cats::ReadOneQuery {
-                select: Some(tufa_common::repositories_types::tufa_server::routes::api::cats::DogColumnSelect::IdColor)    
+                select: Some(tufa_common::repositories_types::tufa_server::routes::api::cats::DogColumnSelect::IdNameColor)    
             }
         },
     )
