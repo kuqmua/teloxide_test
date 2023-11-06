@@ -2,10 +2,10 @@
 pub async fn start_bot() {
     pretty_env_logger::init();
     log::info!("Starting command bot...");
-    let id  = "b129a42c-5f99-4a3e-ab25-154f3549f638";
+    // let id  = "b129a42c-5f99-4a3e-ab25-154f3549f638";
     let api_location = std::string::String::from("http://127.0.0.1:8080/api");
     println!("--------------try_create_one-----------------");//todo add try_create_many
-    match tufa_common::repositories_types::tufa_server::routes::api::cats::try_create_one(
+    let id = match tufa_common::repositories_types::tufa_server::routes::api::cats::try_create_one(
         &api_location,
         tufa_common::repositories_types::tufa_server::routes::api::cats::CreateOneParameters { 
             payload: tufa_common::repositories_types::tufa_server::routes::api::cats::CreateOnePayload {
@@ -16,20 +16,19 @@ pub async fn start_bot() {
     )
     .await
     {
-        Ok(_) => (),
+        Ok(value) => {
+            println!("{value}");
+            value
+        },
         Err(e) => {
-            println!("{e}")
+            panic!("{e}");
         }
-    }
+    };
     println!("--------------try_read_one-----------------");
     match tufa_common::repositories_types::tufa_server::routes::api::cats::try_read_one(
         &api_location,
         tufa_common::repositories_types::tufa_server::routes::api::cats::ReadOneParameters { 
-            path: tufa_common::repositories_types::tufa_server::routes::api::cats::ReadOnePath {
-                id: tufa_common::server::postgres::uuid_wrapper::UuidWrapper::try_from(
-                    tufa_common::server::postgres::uuid_wrapper::PossibleUuidWrapper::from(id)
-                ).unwrap(),
-            }, 
+            path: tufa_common::repositories_types::tufa_server::routes::api::cats::ReadOnePath { id: id.clone() }, 
             query: tufa_common::repositories_types::tufa_server::routes::api::cats::ReadOneQuery {
                 select: Some(tufa_common::repositories_types::tufa_server::routes::api::cats::DogColumnSelect::IdColor)    
             }
@@ -39,18 +38,14 @@ pub async fn start_bot() {
     {
         Ok(cat) => println!("{cat:#?}"),
         Err(e) => {
-            println!("{e}");
+            panic!("{e}");
         }
     }
     println!("--------------try_update_one------------------");//todo try_update_many
     match tufa_common::repositories_types::tufa_server::routes::api::cats::try_update_one(
         &api_location,
         tufa_common::repositories_types::tufa_server::routes::api::cats::UpdateOneParameters { 
-            path: tufa_common::repositories_types::tufa_server::routes::api::cats::UpdateOnePath {
-                id: tufa_common::server::postgres::uuid_wrapper::UuidWrapper::try_from(
-                    tufa_common::server::postgres::uuid_wrapper::PossibleUuidWrapper::from(id)
-                ).unwrap(),
-            }, 
+            path: tufa_common::repositories_types::tufa_server::routes::api::cats::UpdateOnePath { id: id.clone() }, 
             payload: tufa_common::repositories_types::tufa_server::routes::api::cats::UpdateOnePayload { 
                 name: Some(std::string::String::from("name")), 
                 color: Some(std::string::String::from("color")), 
@@ -60,17 +55,13 @@ pub async fn start_bot() {
     .await
     {
         Ok(_) => (),
-        Err(e) => println!("{e}"),
+        Err(e) => panic!("{e}"),
     }
     println!("--------------try_read_one-----------------");
     match tufa_common::repositories_types::tufa_server::routes::api::cats::try_read_one(
         &api_location,
         tufa_common::repositories_types::tufa_server::routes::api::cats::ReadOneParameters { 
-            path: tufa_common::repositories_types::tufa_server::routes::api::cats::ReadOnePath {
-                id: tufa_common::server::postgres::uuid_wrapper::UuidWrapper::try_from(
-                    tufa_common::server::postgres::uuid_wrapper::PossibleUuidWrapper::from(id)
-                ).unwrap(),
-            }, 
+            path: tufa_common::repositories_types::tufa_server::routes::api::cats::ReadOnePath { id: id.clone() }, 
             query: tufa_common::repositories_types::tufa_server::routes::api::cats::ReadOneQuery {
                 select: Some(tufa_common::repositories_types::tufa_server::routes::api::cats::DogColumnSelect::IdColor)    
             }
@@ -80,34 +71,26 @@ pub async fn start_bot() {
     {
         Ok(cat) => println!("{cat:#?}"),
         Err(e) => {
-            println!("{e}");
+            panic!("{e}");
         }
     }
     println!("--------------try_delete_one------------------");
     match tufa_common::repositories_types::tufa_server::routes::api::cats::try_delete_one(
         &api_location,
         tufa_common::repositories_types::tufa_server::routes::api::cats::DeleteOneParameters { 
-            path: tufa_common::repositories_types::tufa_server::routes::api::cats::DeleteOnePath {
-                id: tufa_common::server::postgres::uuid_wrapper::UuidWrapper::try_from(
-                    tufa_common::server::postgres::uuid_wrapper::PossibleUuidWrapper::from(id)
-                ).unwrap(),
-            }
+            path: tufa_common::repositories_types::tufa_server::routes::api::cats::DeleteOnePath { id: id.clone() }
         },
     )
     .await
     {
         Ok(_) => (),
-        Err(e) => println!("{e}"),
+        Err(e) => panic!("{e}"),
     }
     println!("--------------try_read_one-----------------");
     match tufa_common::repositories_types::tufa_server::routes::api::cats::try_read_one(
         &api_location,
         tufa_common::repositories_types::tufa_server::routes::api::cats::ReadOneParameters { 
-            path: tufa_common::repositories_types::tufa_server::routes::api::cats::ReadOnePath {
-                id: tufa_common::server::postgres::uuid_wrapper::UuidWrapper::try_from(
-                    tufa_common::server::postgres::uuid_wrapper::PossibleUuidWrapper::from(id)
-                ).unwrap(),
-            }, 
+            path: tufa_common::repositories_types::tufa_server::routes::api::cats::ReadOnePath { id }, 
             query: tufa_common::repositories_types::tufa_server::routes::api::cats::ReadOneQuery {
                 select: Some(tufa_common::repositories_types::tufa_server::routes::api::cats::DogColumnSelect::IdColor)    
             }
