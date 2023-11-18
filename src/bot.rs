@@ -35,7 +35,9 @@ pub async fn start_bot() {
     )
     .await
     {
-        Ok(cat) => println!("{cat:#?}"),
+        Ok(cat) => {
+            println!("{cat:#?}");
+        },
         Err(e) => {
             panic!("{e}");
         }
@@ -186,62 +188,6 @@ pub async fn start_bot() {
             panic!("{e}");
         }
     }
-    println!("--------------try_read_many-----------------");
-    match tufa_common::repositories_types::tufa_server::routes::api::cats::try_read_many(
-        &api_location,
-        //todo - builder pattern?
-        tufa_common::repositories_types::tufa_server::routes::api::cats::ReadManyParameters { 
-            query: tufa_common::repositories_types::tufa_server::routes::api::cats::ReadManyQuery {
-                select: Some(
-                    tufa_common::repositories_types::tufa_server::routes::api::cats::DogColumnSelect::IdNameColor,
-                ),
-                id: Some(
-                    ids.clone()
-                    // vec![
-                    //     tufa_common::server::postgres::uuid_wrapper::UuidWrapper::try_from(
-                    //         tufa_common::server::postgres::uuid_wrapper::PossibleUuidWrapper::from(id)
-                    //     ).unwrap()
-                    // ]
-                ),
-                name: None
-                // Some(tufa_common::server::routes::helpers::strings_deserialized_from_string_splitted_by_comma::StringsDeserializedFromStringSplittedByComma(vec![std::string::String::from("onename"), std::string::String::from("twoname")]))
-                ,
-                color: None,
-                order_by: Some(tufa_common::repositories_types::tufa_server::routes::api::cats::DogOrderByWrapper(
-                    tufa_common::server::postgres::order_by::OrderBy {
-                        column: tufa_common::repositories_types::tufa_server::routes::api::cats::DogColumn::Id,
-                        order: Some(tufa_common::server::postgres::order::Order::Asc)
-                    }
-                )),
-                limit: tufa_common::server::postgres::postgres_bigint::PostgresBigint(limit),
-                offset: Some(tufa_common::server::postgres::postgres_bigint::PostgresBigint(offset)),
-            }
-        },
-    )
-    .await
-    {
-        Ok(vec_cat_options) => {
-            println!("{vec_cat_options:#?}");
-            // let vec_cat_id: Vec<
-            //     tufa_common::repositories_types::tufa_server::routes::api::cats::DogId,
-            // > = vec_cat_options
-            //     .into_iter()
-            //     .filter_map(|value| match value.id {
-            //         Some(id) => Some(
-            //             tufa_common::repositories_types::tufa_server::routes::api::cats::DogId {
-            //                 id,
-            //             },
-            //         ),
-            //         None => None,
-            //     })
-            //     .collect();
-            // println!("{vec_cat_id:#?}");
-        }
-        Err(e) => {
-            panic!("{e}");
-        }
-    }
-    // // //todo handle please use put
     println!("--------------try_update_many------------------");
     match tufa_common::repositories_types::tufa_server::routes::api::cats::try_update_many(
         &api_location,
@@ -321,95 +267,6 @@ pub async fn start_bot() {
             panic!("{e}");
         }
     }
-    println!("--------------try_read_many-----------------");
-    match tufa_common::repositories_types::tufa_server::routes::api::cats::try_read_many(
-        &api_location,
-        //todo - builder pattern?
-        tufa_common::repositories_types::tufa_server::routes::api::cats::ReadManyParameters { 
-            query: tufa_common::repositories_types::tufa_server::routes::api::cats::ReadManyQuery {
-                select: Some(
-                    tufa_common::repositories_types::tufa_server::routes::api::cats::DogColumnSelect::IdNameColor,
-                ),
-                id: Some(
-                    ids.clone()
-                    // vec![
-                    //     tufa_common::server::postgres::uuid_wrapper::UuidWrapper::try_from(
-                    //         tufa_common::server::postgres::uuid_wrapper::PossibleUuidWrapper::from(id)
-                    //     ).unwrap()
-                    // ]
-                ),
-                name: None
-                // Some(tufa_common::server::routes::helpers::strings_deserialized_from_string_splitted_by_comma::StringsDeserializedFromStringSplittedByComma(vec![std::string::String::from("onename"), std::string::String::from("twoname")]))
-                ,
-                color: None,
-                order_by: Some(tufa_common::repositories_types::tufa_server::routes::api::cats::DogOrderByWrapper(
-                    tufa_common::server::postgres::order_by::OrderBy {
-                        column: tufa_common::repositories_types::tufa_server::routes::api::cats::DogColumn::Id,
-                        order: Some(tufa_common::server::postgres::order::Order::Asc)
-                    }
-                )),
-                limit: tufa_common::server::postgres::postgres_bigint::PostgresBigint(limit),
-                offset: Some(tufa_common::server::postgres::postgres_bigint::PostgresBigint(offset)),
-            }
-        },
-    )
-    .await
-    {
-        Ok(vec_cat_options) => {
-            println!("{vec_cat_options:#?}");
-            // let vec_cat_id: Vec<
-            //     tufa_common::repositories_types::tufa_server::routes::api::cats::DogId,
-            // > = vec_cat_options
-            //     .into_iter()
-            //     .filter_map(|value| match value.id {
-            //         Some(id) => Some(
-            //             tufa_common::repositories_types::tufa_server::routes::api::cats::DogId {
-            //                 id,
-            //             },
-            //         ),
-            //         None => None,
-            //     })
-            //     .collect();
-            // println!("{vec_cat_id:#?}");
-        }
-        Err(e) => {
-            panic!("{e}");
-        }
-    }
-    println!("--------------try_delete_many------------------");
-    match tufa_common::repositories_types::tufa_server::routes::api::cats::try_delete_many(
-        &api_location,
-        tufa_common::repositories_types::tufa_server::routes::api::cats::DeleteManyParameters { 
-            query: tufa_common::repositories_types::tufa_server::routes::api::cats::DeleteManyQuery {
-                id: Some(
-                    ids.clone()
-                    // vec![
-                    //     tufa_common::server::postgres::uuid_wrapper::UuidWrapper::try_from(
-                    //         tufa_common::server::postgres::uuid_wrapper::PossibleUuidWrapper::from(id)
-                    //     ).unwrap(),
-                    // ]   
-                )
-                ,
-                name: None
-                // Some(tufa_common::server::routes::helpers::strings_deserialized_from_string_splitted_by_comma::StringsDeserializedFromStringSplittedByComma(
-                //     vec![
-                //         std::string::String::from("onename"), 
-                //         std::string::String::from("twoname")
-                //         ]
-                //     )
-                // )
-                ,
-                color: None,
-            } 
-        },
-    )
-    .await
-    {
-        Ok(_) => (),
-        Err(e) => {
-            panic!("{e}");
-        },
-    }
     println!("--------------try_read_many_with_body-----------------");
     match tufa_common::repositories_types::tufa_server::routes::api::cats::try_read_many_with_body(
         &api_location,
@@ -444,61 +301,6 @@ pub async fn start_bot() {
                 limit: tufa_common::server::postgres::postgres_bigint::PostgresBigint(limit),
                 offset: tufa_common::server::postgres::postgres_bigint::PostgresBigint(offset),
             } 
-        },
-    )
-    .await
-    {
-        Ok(vec_cat_options) => {
-            println!("{vec_cat_options:#?}");
-            // let vec_cat_id: Vec<
-            //     tufa_common::repositories_types::tufa_server::routes::api::cats::DogId,
-            // > = vec_cat_options
-            //     .into_iter()
-            //     .filter_map(|value| match value.id {
-            //         Some(id) => Some(
-            //             tufa_common::repositories_types::tufa_server::routes::api::cats::DogId {
-            //                 id,
-            //             },
-            //         ),
-            //         None => None,
-            //     })
-            //     .collect();
-            // println!("{vec_cat_id:#?}");
-        }
-        Err(e) => {
-            println!("{e}");
-        }
-    }
-    println!("--------------try_read_many-----------------");
-    match tufa_common::repositories_types::tufa_server::routes::api::cats::try_read_many(
-        &api_location,
-        //todo - builder pattern?
-        tufa_common::repositories_types::tufa_server::routes::api::cats::ReadManyParameters { 
-            query: tufa_common::repositories_types::tufa_server::routes::api::cats::ReadManyQuery {
-                select: Some(
-                    tufa_common::repositories_types::tufa_server::routes::api::cats::DogColumnSelect::IdNameColor,
-                ),
-                id: Some(
-                    ids.clone()
-                    // vec![
-                    //     tufa_common::server::postgres::uuid_wrapper::UuidWrapper::try_from(
-                    //         tufa_common::server::postgres::uuid_wrapper::PossibleUuidWrapper::from(id)
-                    //     ).unwrap()
-                    // ]
-                ),
-                name: None
-                // Some(tufa_common::server::routes::helpers::strings_deserialized_from_string_splitted_by_comma::StringsDeserializedFromStringSplittedByComma(vec![std::string::String::from("onename"), std::string::String::from("twoname")]))
-                ,
-                color: None,
-                order_by: Some(tufa_common::repositories_types::tufa_server::routes::api::cats::DogOrderByWrapper(
-                    tufa_common::server::postgres::order_by::OrderBy {
-                        column: tufa_common::repositories_types::tufa_server::routes::api::cats::DogColumn::Id,
-                        order: Some(tufa_common::server::postgres::order::Order::Asc)
-                    }
-                )),
-                limit: tufa_common::server::postgres::postgres_bigint::PostgresBigint(limit),
-                offset: Some(tufa_common::server::postgres::postgres_bigint::PostgresBigint(offset)),
-            }
         },
     )
     .await
