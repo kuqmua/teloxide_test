@@ -18,7 +18,10 @@ pub async fn start_bot() {
     )
     .await
     {
-        Ok(value) => value,
+        Ok(value) => {
+            println!("{value:#?}");
+            value
+        },
         Err(e) => {
             panic!("{e}");
         }
@@ -123,7 +126,10 @@ pub async fn start_bot() {
     )
     .await
     {
-        Ok(value) => value,
+        Ok(value) => {
+            println!("{value:#?}");
+            value
+        },
         Err(e) => {
             panic!("{e}");
         }
