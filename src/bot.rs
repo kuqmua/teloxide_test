@@ -38,15 +38,13 @@ pub async fn start_bot() {
     )
     .await
     {
-        Ok(value) => {
-            println!("{value:#?}");
-        },
+        Ok(value) => println!("{value:#?}"),
         Err(e) => {
             panic!("{e}");
         }
     }
     println!("--------------try_update_one------------------");//todo try_update_many
-    match tufa_common::repositories_types::tufa_server::routes::api::cats::try_update_one(
+    let id = match tufa_common::repositories_types::tufa_server::routes::api::cats::try_update_one(
         &api_location,
         tufa_common::repositories_types::tufa_server::routes::api::cats::UpdateOneParameters { 
             path: tufa_common::repositories_types::tufa_server::routes::api::cats::UpdateOnePath { id: id.clone() }, 
@@ -58,9 +56,12 @@ pub async fn start_bot() {
     )
     .await
     {
-        Ok(value) => println!("{value:#?}"),
+        Ok(value) => {
+            println!("{value:#?}");
+            value
+        },
         Err(e) => panic!("{e}"),
-    }
+    };
     println!("--------------try_read_one-----------------");
     match tufa_common::repositories_types::tufa_server::routes::api::cats::try_read_one(
         &api_location,
@@ -272,6 +273,58 @@ pub async fn start_bot() {
             panic!("{e}");
         }
     }
+    println!("--------------try_delete_many_with_body-----------------");
+    match tufa_common::repositories_types::tufa_server::routes::api::cats::try_delete_many_with_body(
+        &api_location,
+        //todo - builder pattern?
+        tufa_common::repositories_types::tufa_server::routes::api::cats::DeleteManyWithBodyParameters{ 
+            payload: tufa_common::repositories_types::tufa_server::routes::api::cats::DeleteManyWithBodyPayload { 
+                id: Some(
+                    ids.clone()
+                    // vec![
+                    //     tufa_common::server::postgres::uuid_wrapper::UuidWrapper::try_from(
+                    //         tufa_common::server::postgres::uuid_wrapper::PossibleUuidWrapper::from(id)
+                    //     ).unwrap()
+                    // ]
+                ),
+                name: None
+                // Some(vec![tufa_common::server::postgres::regex_filter::RegexFilter {
+                //     regex: std::string::String::from("test"),
+                //     conjuctive_operator: tufa_common::server::postgres::conjuctive_operator::ConjunctiveOperator::Or,
+                // }])
+                ,//or and support
+                color: None
+                // Some(vec![tufa_common::server::postgres::regex_filter::RegexFilter {
+                //     regex: std::string::String::from("test"),
+                //     conjuctive_operator: tufa_common::server::postgres::conjuctive_operator::ConjunctiveOperator::Or,
+                // }])
+                ,
+            } 
+        },
+    )
+    .await
+    {
+        Ok(value) => {
+            println!("{value:#?}");
+            // let vec_cat_id: Vec<
+            //     tufa_common::repositories_types::tufa_server::routes::api::cats::DogId,
+            // > = value
+            //     .into_iter()
+            //     .filter_map(|value| match value.id {
+            //         Some(id) => Some(
+            //             tufa_common::repositories_types::tufa_server::routes::api::cats::DogId {
+            //                 id,
+            //             },
+            //         ),
+            //         None => None,
+            //     })
+            //     .collect();
+            // println!("{vec_cat_id:#?}");
+        }
+        Err(e) => {
+            println!("{e}");
+        }
+    }
     println!("--------------try_read_many_with_body-----------------");
     match tufa_common::repositories_types::tufa_server::routes::api::cats::try_read_many_with_body(
         &api_location,
@@ -331,7 +384,7 @@ pub async fn start_bot() {
             println!("{e}");
         }
     }
-
+    
     // let bot = teloxide::Bot::from_env();
     // teloxide::commands_repl(bot, answer, {
     //     use teloxide::utils::command::BotCommands;
