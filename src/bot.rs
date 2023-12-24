@@ -38,8 +38,8 @@ pub async fn start_bot() {
     )
     .await
     {
-        Ok(cat) => {
-            println!("{cat:#?}");
+        Ok(value) => {
+            println!("{value:#?}");
         },
         Err(e) => {
             panic!("{e}");
@@ -58,7 +58,7 @@ pub async fn start_bot() {
     )
     .await
     {
-        Ok(_) => (),
+        Ok(value) => println!("{value:#?}"),
         Err(e) => panic!("{e}"),
     }
     println!("--------------try_read_one-----------------");
@@ -73,7 +73,7 @@ pub async fn start_bot() {
     )
     .await
     {
-        Ok(cat) => println!("{cat:#?}"),
+        Ok(value) => println!("{value:#?}"),
         Err(e) => {
             panic!("{e}");
         }
@@ -87,7 +87,7 @@ pub async fn start_bot() {
     )
     .await
     {
-        Ok(_) => (),
+        Ok(value) => println!("{value:#?}"),
         Err(e) => panic!("{e}"),
     }
     println!("--------------try_read_one-----------------");
@@ -102,7 +102,7 @@ pub async fn start_bot() {
     )
     .await
     {
-        Ok(cat) => println!("{cat:#?}"),
+        Ok(value) => println!("{value:#?}"),
         Err(e) => {
             println!("{e}");
         }
@@ -134,7 +134,6 @@ pub async fn start_bot() {
             panic!("{e}");
         }
     };
-    println!("{ids:#?}");
     println!("--------------try_read_many_with_body-----------------");
     match tufa_common::repositories_types::tufa_server::routes::api::cats::try_read_many_with_body(
         &api_location,
@@ -173,11 +172,11 @@ pub async fn start_bot() {
     )
     .await
     {
-        Ok(vec_cat_options) => {
-            println!("{vec_cat_options:#?}");
+        Ok(value) => {
+            println!("{value:#?}");
             // let vec_cat_id: Vec<
             //     tufa_common::repositories_types::tufa_server::routes::api::cats::DogId,
-            // > = vec_cat_options
+            // > = value
             //     .into_iter()
             //     .filter_map(|value| match value.id {
             //         Some(id) => Some(
@@ -209,7 +208,7 @@ pub async fn start_bot() {
     )
     .await
     {
-        Ok(_) => (),
+        Ok(value) => println!("{value:#?}"),
         Err(e) => {
             panic!("{e}");
         },
@@ -252,11 +251,11 @@ pub async fn start_bot() {
     )
     .await
     {
-        Ok(vec_cat_options) => {
-            println!("{vec_cat_options:#?}");
+        Ok(value) => {
+            println!("{value:#?}");
             // let vec_cat_id: Vec<
             //     tufa_common::repositories_types::tufa_server::routes::api::cats::DogId,
-            // > = vec_cat_options
+            // > = value
             //     .into_iter()
             //     .filter_map(|value| match value.id {
             //         Some(id) => Some(
@@ -311,11 +310,11 @@ pub async fn start_bot() {
     )
     .await
     {
-        Ok(vec_cat_options) => {
-            println!("{vec_cat_options:#?}");
+        Ok(value) => {
+            println!("{value:#?}");
             // let vec_cat_id: Vec<
             //     tufa_common::repositories_types::tufa_server::routes::api::cats::DogId,
-            // > = vec_cat_options
+            // > = value
             //     .into_iter()
             //     .filter_map(|value| match value.id {
             //         Some(id) => Some(
