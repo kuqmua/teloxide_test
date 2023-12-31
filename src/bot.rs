@@ -3,7 +3,7 @@ pub async fn start_bot() {
     pretty_env_logger::init();
     log::info!("Starting command bot...");
     // let id  = "b129a42c-5f99-4a3e-ab25-154f3549f638";
-    let api_location = std::string::String::from("http://127.0.0.1:8080/api");
+    let api_location = std::string::String::from("http://127.0.0.1:8080");
     let limit = 1000;
     let offset = 0;
     println!("--------------try_create_one-----------------");//todo add try_create_many
