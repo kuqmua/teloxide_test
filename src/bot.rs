@@ -113,7 +113,7 @@ pub async fn start_bot() {
     let ids = match tufa_common::repositories_types::tufa_server::routes::api::cats::try_create_many(
         &api_location,
         tufa_common::repositories_types::tufa_server::routes::api::cats::CreateManyParameters { 
-            payload: vec![
+            payload: tufa_common::repositories_types::tufa_server::routes::api::cats::CreateManyPayload(vec![
                 tufa_common::repositories_types::tufa_server::routes::api::cats::CreateManyPayloadElement{
                     name: String::from("try_create_many_name1"),
                     color: String::from("try_create_many_color1"),
@@ -122,7 +122,7 @@ pub async fn start_bot() {
                     name: String::from("try_create_many_name2"),
                     color: String::from("try_create_many_color2"),
                 },
-            ]
+            ])
         },
     )
     .await
