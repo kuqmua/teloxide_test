@@ -135,12 +135,12 @@ pub async fn start_bot() {
             panic!("{e}");
         }
     };
-    println!("--------------try_read_many_with_body-----------------");
-    match tufa_common::repositories_types::tufa_server::routes::api::cats::try_read_many_with_body(
+    println!("--------------try_read_many-----------------");
+    match tufa_common::repositories_types::tufa_server::routes::api::cats::try_read_many(
         &api_location,
         //todo - builder pattern?
-        tufa_common::repositories_types::tufa_server::routes::api::cats::ReadManyWithBodyParameters{ 
-            payload: tufa_common::repositories_types::tufa_server::routes::api::cats::ReadManyWithBodyPayload { 
+        tufa_common::repositories_types::tufa_server::routes::api::cats::ReadManyParameters{ 
+            payload: tufa_common::repositories_types::tufa_server::routes::api::cats::ReadManyPayload { 
                 select: tufa_common::repositories_types::tufa_server::routes::api::cats::DogColumnSelect::IdNameColor,
                 id: Some(
                     ids.clone()
@@ -214,12 +214,12 @@ pub async fn start_bot() {
             panic!("{e}");
         },
     }
-    println!("--------------try_read_many_with_body-----------------");
-    match tufa_common::repositories_types::tufa_server::routes::api::cats::try_read_many_with_body(
+    println!("--------------try_read_many-----------------");
+    match tufa_common::repositories_types::tufa_server::routes::api::cats::try_read_many(
         &api_location,
         //todo - builder pattern?
-        tufa_common::repositories_types::tufa_server::routes::api::cats::ReadManyWithBodyParameters{ 
-            payload: tufa_common::repositories_types::tufa_server::routes::api::cats::ReadManyWithBodyPayload { 
+        tufa_common::repositories_types::tufa_server::routes::api::cats::ReadManyParameters{ 
+            payload: tufa_common::repositories_types::tufa_server::routes::api::cats::ReadManyPayload { 
                 select: tufa_common::repositories_types::tufa_server::routes::api::cats::DogColumnSelect::IdNameColor,
                 id: Some(
                     ids.clone()
@@ -273,12 +273,12 @@ pub async fn start_bot() {
             panic!("{e}");
         }
     }
-    println!("--------------try_delete_many_with_body-----------------");
-    match tufa_common::repositories_types::tufa_server::routes::api::cats::try_delete_many_with_body(
+    println!("--------------try_delete_many-----------------");
+    match tufa_common::repositories_types::tufa_server::routes::api::cats::try_delete_many(
         &api_location,
         //todo - builder pattern?
-        tufa_common::repositories_types::tufa_server::routes::api::cats::DeleteManyWithBodyParameters{ 
-            payload: tufa_common::repositories_types::tufa_server::routes::api::cats::DeleteManyWithBodyPayload { 
+        tufa_common::repositories_types::tufa_server::routes::api::cats::DeleteManyParameters{ 
+            payload: tufa_common::repositories_types::tufa_server::routes::api::cats::DeleteManyPayload { 
                 id: Some(
                     ids.clone()
                     // vec![
@@ -325,12 +325,12 @@ pub async fn start_bot() {
             println!("{e}");
         }
     }
-    println!("--------------try_read_many_with_body-----------------");
-    match tufa_common::repositories_types::tufa_server::routes::api::cats::try_read_many_with_body(
+    println!("--------------try_read_many-----------------");
+    match tufa_common::repositories_types::tufa_server::routes::api::cats::try_read_many(
         &api_location,
         //todo - builder pattern?
-        tufa_common::repositories_types::tufa_server::routes::api::cats::ReadManyWithBodyParameters{ 
-            payload: tufa_common::repositories_types::tufa_server::routes::api::cats::ReadManyWithBodyPayload { 
+        tufa_common::repositories_types::tufa_server::routes::api::cats::ReadManyParameters{ 
+            payload: tufa_common::repositories_types::tufa_server::routes::api::cats::ReadManyPayload { 
                 select: tufa_common::repositories_types::tufa_server::routes::api::cats::DogColumnSelect::IdNameColor,
                 id: Some(
                     ids.clone()
