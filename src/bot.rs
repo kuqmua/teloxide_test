@@ -30,9 +30,9 @@ pub async fn start_bot() {
     match tufa_common::repositories_types::tufa_server::routes::api::cats::try_read_one(
         &api_location,
         tufa_common::repositories_types::tufa_server::routes::api::cats::ReadOneParameters { 
-            path: tufa_common::repositories_types::tufa_server::routes::api::cats::ReadOnePath { id: id.clone() }, 
-            query: tufa_common::repositories_types::tufa_server::routes::api::cats::ReadOneQuery {
-                select: Some(tufa_common::repositories_types::tufa_server::routes::api::cats::DogColumnSelect::IdNameColor)    
+            payload: tufa_common::repositories_types::tufa_server::routes::api::cats::ReadOnePayload {
+                id: id.clone(),
+                select: tufa_common::repositories_types::tufa_server::routes::api::cats::DogColumnSelect::IdNameColor
             }
         },
     )
@@ -47,8 +47,8 @@ pub async fn start_bot() {
     let id = match tufa_common::repositories_types::tufa_server::routes::api::cats::try_update_one(
         &api_location,
         tufa_common::repositories_types::tufa_server::routes::api::cats::UpdateOneParameters { 
-            path: tufa_common::repositories_types::tufa_server::routes::api::cats::UpdateOnePath { id: id.clone() }, 
-            payload: tufa_common::repositories_types::tufa_server::routes::api::cats::UpdateOnePayload { 
+            payload: tufa_common::repositories_types::tufa_server::routes::api::cats::UpdateOnePayload {
+                id: id.clone(),
                 name: Some(std::string::String::from("name")), 
                 color: Some(std::string::String::from("color")), 
             }
@@ -66,9 +66,9 @@ pub async fn start_bot() {
     match tufa_common::repositories_types::tufa_server::routes::api::cats::try_read_one(
         &api_location,
         tufa_common::repositories_types::tufa_server::routes::api::cats::ReadOneParameters { 
-            path: tufa_common::repositories_types::tufa_server::routes::api::cats::ReadOnePath { id: id.clone() }, 
-            query: tufa_common::repositories_types::tufa_server::routes::api::cats::ReadOneQuery {
-                select: Some(tufa_common::repositories_types::tufa_server::routes::api::cats::DogColumnSelect::IdNameColor)    
+            payload: tufa_common::repositories_types::tufa_server::routes::api::cats::ReadOnePayload {
+                id: id.clone(),
+                select: tufa_common::repositories_types::tufa_server::routes::api::cats::DogColumnSelect::IdNameColor
             }
         },
     )
@@ -83,7 +83,9 @@ pub async fn start_bot() {
     match tufa_common::repositories_types::tufa_server::routes::api::cats::try_delete_one(
         &api_location,
         tufa_common::repositories_types::tufa_server::routes::api::cats::DeleteOneParameters { 
-            path: tufa_common::repositories_types::tufa_server::routes::api::cats::DeleteOnePath { id: id.clone() }
+            payload: tufa_common::repositories_types::tufa_server::routes::api::cats::DeleteOnePayload {
+                id: id.clone()
+            }
         },
     )
     .await
@@ -95,9 +97,9 @@ pub async fn start_bot() {
     match tufa_common::repositories_types::tufa_server::routes::api::cats::try_read_one(
         &api_location,
         tufa_common::repositories_types::tufa_server::routes::api::cats::ReadOneParameters { 
-            path: tufa_common::repositories_types::tufa_server::routes::api::cats::ReadOnePath { id }, 
-            query: tufa_common::repositories_types::tufa_server::routes::api::cats::ReadOneQuery {
-                select: Some(tufa_common::repositories_types::tufa_server::routes::api::cats::DogColumnSelect::IdNameColor)    
+            payload: tufa_common::repositories_types::tufa_server::routes::api::cats::ReadOnePayload {
+                id,
+                select: tufa_common::repositories_types::tufa_server::routes::api::cats::DogColumnSelect::IdNameColor 
             }
         },
     )
@@ -198,13 +200,15 @@ pub async fn start_bot() {
     match tufa_common::repositories_types::tufa_server::routes::api::cats::try_update_many(
         &api_location,
         tufa_common::repositories_types::tufa_server::routes::api::cats::UpdateManyParameters { 
-            payload: ids.clone().into_iter().map(|element| {
-                tufa_common::repositories_types::tufa_server::routes::api::cats::UpdateManyPayloadElement {
-                    id: element,  
-                    name: std::string::String::from("name"), //todo make sure name and color both are not None(make it option<value>, not just a value)
-                    color: std::string::String::from("color"), 
-                }
-            }).collect()
+            payload: tufa_common::repositories_types::tufa_server::routes::api::cats::UpdateManyPayload(
+                ids.clone().into_iter().map(|element| {
+                    tufa_common::repositories_types::tufa_server::routes::api::cats::UpdateManyPayloadElement {
+                        id: element,  
+                        name: std::string::String::from("name"), //todo make sure name and color both are not None(make it option<value>, not just a value)
+                        color: std::string::String::from("color"), 
+                    }
+                }).collect()
+            )
         }
     )
     .await
