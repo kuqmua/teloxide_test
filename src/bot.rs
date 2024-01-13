@@ -8,7 +8,7 @@ pub async fn start_bot() {
     let offset = 0;
     //
     println!("--------------try_create_many-----------------");//todo add try_create_many
-    let ids = match tufa_common::repositories_types::tufa_server::routes::api::cats::try_create_many(
+    let primary_keys = match tufa_common::repositories_types::tufa_server::routes::api::cats::try_create_many(
         &api_location,
         tufa_common::repositories_types::tufa_server::routes::api::cats::CreateManyParameters { 
             payload: tufa_common::repositories_types::tufa_server::routes::api::cats::CreateManyPayload(vec![
@@ -41,7 +41,7 @@ pub async fn start_bot() {
             payload: tufa_common::repositories_types::tufa_server::routes::api::cats::ReadManyPayload { 
                 select: tufa_common::repositories_types::tufa_server::routes::api::cats::DogColumnSelect::IdNameColor,
                 id: Some(
-                    ids.clone()
+                    primary_keys.clone()
                     // vec![
                     //     tufa_common::server::postgres::uuid_wrapper::UuidWrapper::try_from(
                     //         tufa_common::server::postgres::uuid_wrapper::PossibleUuidWrapper::from(id)
@@ -97,7 +97,7 @@ pub async fn start_bot() {
         &api_location,
         tufa_common::repositories_types::tufa_server::routes::api::cats::UpdateManyParameters { 
             payload: tufa_common::repositories_types::tufa_server::routes::api::cats::UpdateManyPayload(
-                ids.clone().into_iter().map(|element| {
+                primary_keys.clone().into_iter().map(|element| {
                     tufa_common::repositories_types::tufa_server::routes::api::cats::UpdateManyPayloadElement {
                         id: element,  
                         name: std::string::String::from("name"), //todo make sure name and color both are not None(make it option<value>, not just a value)
@@ -122,7 +122,7 @@ pub async fn start_bot() {
             payload: tufa_common::repositories_types::tufa_server::routes::api::cats::ReadManyPayload { 
                 select: tufa_common::repositories_types::tufa_server::routes::api::cats::DogColumnSelect::IdNameColor,
                 id: Some(
-                    ids.clone()
+                    primary_keys.clone()
                     // vec![
                     //     tufa_common::server::postgres::uuid_wrapper::UuidWrapper::try_from(
                     //         tufa_common::server::postgres::uuid_wrapper::PossibleUuidWrapper::from(id)
@@ -180,7 +180,7 @@ pub async fn start_bot() {
         tufa_common::repositories_types::tufa_server::routes::api::cats::DeleteManyParameters{ 
             payload: tufa_common::repositories_types::tufa_server::routes::api::cats::DeleteManyPayload { 
                 id: Some(
-                    ids.clone()
+                    primary_keys.clone()
                     // vec![
                     //     tufa_common::server::postgres::uuid_wrapper::UuidWrapper::try_from(
                     //         tufa_common::server::postgres::uuid_wrapper::PossibleUuidWrapper::from(id)
@@ -233,7 +233,7 @@ pub async fn start_bot() {
             payload: tufa_common::repositories_types::tufa_server::routes::api::cats::ReadManyPayload { 
                 select: tufa_common::repositories_types::tufa_server::routes::api::cats::DogColumnSelect::IdNameColor,
                 id: Some(
-                    ids.clone()
+                    primary_keys.clone()
                     // vec![
                     //     tufa_common::server::postgres::uuid_wrapper::UuidWrapper::try_from(
                     //         tufa_common::server::postgres::uuid_wrapper::PossibleUuidWrapper::from(id)
@@ -286,7 +286,7 @@ pub async fn start_bot() {
     }    
     //
     println!("--------------try_create_one-----------------");//todo add try_create_many
-    let id = match tufa_common::repositories_types::tufa_server::routes::api::cats::try_create_one(
+    let primary_key = match tufa_common::repositories_types::tufa_server::routes::api::cats::try_create_one(
         &api_location,
         tufa_common::repositories_types::tufa_server::routes::api::cats::CreateOneParameters { 
             payload: tufa_common::repositories_types::tufa_server::routes::api::cats::CreateOnePayload {
@@ -310,7 +310,7 @@ pub async fn start_bot() {
         &api_location,
         tufa_common::repositories_types::tufa_server::routes::api::cats::ReadOneParameters { 
             payload: tufa_common::repositories_types::tufa_server::routes::api::cats::ReadOnePayload {
-                id: id.clone(),
+                id: primary_key.clone(),
                 select: tufa_common::repositories_types::tufa_server::routes::api::cats::DogColumnSelect::IdNameColor
             }
         },
@@ -323,11 +323,11 @@ pub async fn start_bot() {
         }
     }
     println!("--------------try_update_one------------------");//todo try_update_many
-    let id = match tufa_common::repositories_types::tufa_server::routes::api::cats::try_update_one(
+    let primary_key = match tufa_common::repositories_types::tufa_server::routes::api::cats::try_update_one(
         &api_location,
         tufa_common::repositories_types::tufa_server::routes::api::cats::UpdateOneParameters { 
             payload: tufa_common::repositories_types::tufa_server::routes::api::cats::UpdateOnePayload {
-                id: id.clone(),
+                id: primary_key.clone(),
                 name: Some(std::string::String::from("name")), 
                 color: Some(std::string::String::from("color")), 
             }
@@ -346,7 +346,7 @@ pub async fn start_bot() {
         &api_location,
         tufa_common::repositories_types::tufa_server::routes::api::cats::ReadOneParameters { 
             payload: tufa_common::repositories_types::tufa_server::routes::api::cats::ReadOnePayload {
-                id: id.clone(),
+                id: primary_key.clone(),
                 select: tufa_common::repositories_types::tufa_server::routes::api::cats::DogColumnSelect::IdNameColor
             }
         },
@@ -363,7 +363,7 @@ pub async fn start_bot() {
         &api_location,
         tufa_common::repositories_types::tufa_server::routes::api::cats::DeleteOneParameters { 
             payload: tufa_common::repositories_types::tufa_server::routes::api::cats::DeleteOnePayload {
-                id: id.clone()
+                id: primary_key.clone()
             }
         },
     )
@@ -377,7 +377,7 @@ pub async fn start_bot() {
         &api_location,
         tufa_common::repositories_types::tufa_server::routes::api::cats::ReadOneParameters { 
             payload: tufa_common::repositories_types::tufa_server::routes::api::cats::ReadOnePayload {
-                id,
+                id: primary_key,
                 select: tufa_common::repositories_types::tufa_server::routes::api::cats::DogColumnSelect::IdNameColor 
             }
         },
