@@ -13,12 +13,12 @@ pub async fn start_bot() {
         tufa_common::repositories_types::tufa_server::routes::api::cats::CreateManyParameters { 
             payload: tufa_common::repositories_types::tufa_server::routes::api::cats::CreateManyPayload(vec![
                 tufa_common::repositories_types::tufa_server::routes::api::cats::CreateManyPayloadElement{
-                    name: String::from("try_create_many_name1"),
-                    color: String::from("try_create_many_color1"),
+                    name: std::string::String::from("try_create_many_name1"),
+                    color: std::string::String::from("try_create_many_color1"),
                 },
                 tufa_common::repositories_types::tufa_server::routes::api::cats::CreateManyPayloadElement{
-                    name: String::from("try_create_many_name2"),
-                    color: String::from("try_create_many_color2"),
+                    name: std::string::String::from("try_create_many_name2"),
+                    color: std::string::String::from("try_create_many_color2"),
                 },
             ])
         },
@@ -290,8 +290,8 @@ pub async fn start_bot() {
         &api_location,
         tufa_common::repositories_types::tufa_server::routes::api::cats::CreateOneParameters { 
             payload: tufa_common::repositories_types::tufa_server::routes::api::cats::CreateOnePayload {
-                name: String::from("try_create_one_name"),
-                color: String::from("try_create_one_color"),
+                name: std::string::String::from("try_create_one_name"),
+                color: std::string::String::from("try_create_one_color"),
             }
         },
     )
@@ -408,7 +408,7 @@ pub async fn start_bot() {
 //     #[command(description = "handle a username.")]
 //     Username(String),
 //     #[command(description = "handle a username and an age.", parse_with = "split")]
-//     UsernameAndAge { username: String, age: u8 },
+//     UsernameAndAge { username: std::string::String, age: u8 },
 //     #[command(description = "show bot source code info ")]
 //     GitInfo,
 // }
