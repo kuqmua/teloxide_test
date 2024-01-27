@@ -19,7 +19,7 @@ serde_json = {version = "=1.0"}
 # tufa_common = {git = "https://github.com/kuqmua/tufa_common"}# git version
 compile_time_git_info = {path = "../compile_time_git_info"}
 tufa_common = {path = "../tufa_common"}# local dev test without commits version
-user_port_try_from_u16 = {path = "../proc_macros/user_port_try_from_u16"}
+user_port_try_from_u16 = {path = "../user_port_try_from_u16"}
 error_occurence_lib = {path = "../error_occurence_lib"}
 
 [lints]
